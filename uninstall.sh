@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+set -e
+
+# Claude Desktop Russian Localization Uninstaller
+# Supports macOS and Linux
+
+OS="$(uname -s)"
+
+echo "=== Удаление русификатора Claude Desktop ==="
+
+if [ "$OS" = "Darwin" ]; then
+  APP_PATH="/Applications/Claude.app"
+  ION_DIR="$APP_PATH/Contents/Resources/ion-dist"
+elif [ "$OS" = "Linux" ]; then
+  CANDIDATE_PATHS=(
+    "/opt/Claude/resources/ion-dist"
+    "/opt/claude-desktop/resources/ion-dist"
+    "/usr/lib/claude/resources/ion-dist"
+    "$HOME/.local/share/Claude/resources/ion-dist"
+    "/var/lib/flatpak/app/com.anthropic.Claude/current/active/files/extra/resources/ion-dist"
+  )
+  ION_DIR=""
+  for p in "${CANDIDATE_PATHS[@]}"; do
+    if [ -d "$p" ]; then
+      ION_DIR="$p"
+      break
+    fi
+  done
+  APP_PATH="$(dirname "$(dirname "$ION_DIR")")"
+else
+  echo "❌ Ошибка: Неподдерживаемая ОС: $OS"
+  exit 1
+fi
+
+if [ -z "$ION_DIR" ] || [ ! -d "$ION_DIR" ]; then
+  echo "❌ Ошибка: Папка ion-dist не найдена"
+  exit 1
+fi
+
+I18N_DIR="$ION_DIR/i18n"
+DYN_I18N_DIR="$I18N_DIR/dynamic"
+INDEX_HTML="$ION_DIR/index.html"
+
+BACKUP_HTML="$ION_DIR/index.html.original"
+BACKUP_EN="$I18N_DIR/en-US.json.original"
+BACKUP_DYN="$DYN_I18N_DIR/en-US.json.original"
+TARGET_SCRIPT="$ION_DIR/i18n-ru.js"
+
+if pgrep -x "Claude" > /dev/null 2>&1 || pgrep -x "claude" > /dev/null 2>&1; then
+  echo "⏳ Завершаем процесс Claude..."
+  pkill -x "Claude" 2>/dev/null || true
+  pkill -x "claude" 2>/dev/null || true
+  sleep 1
+fi
+
+# Восстановление каталогов
+if [ -f "$BACKUP_EN" ]; then
+  echo "📦 Восстановление оригинального en-US.json..."
+  cp "$BACKUP_EN" "$I18N_DIR/en-US.json"
+  rm "$BACKUP_EN"
+fi
+
+if [ -f "$BACKUP_DYN" ]; then
+  echo "📦 Восстановление оригинального dynamic/en-US.json..."
+  cp "$BACKUP_DYN" "$DYN_I18N_DIR/en-US.json"
+  rm "$BACKUP_DYN"
+fi
+
+# Восстановление index.html
+if [ -f "$BACKUP_HTML" ]; then
+  echo "📦 Восстановление оригинального index.html..."
+  cp "$BACKUP_HTML" "$INDEX_HTML"
+  rm "$BACKUP_HTML"
+else
+  sed -i '' 's|<script src="/i18n-ru.js"></script>||g' "$INDEX_HTML" 2>/dev/null || \
+  sed -i 's|<script src="/i18n-ru.js"></script>||g' "$INDEX_HTML"
+fi
+
+# Удаление i18n-ru.js
+if [ -f "$TARGET_SCRIPT" ]; then
+  echo "🗑️ Удаление i18n-ru.js..."
+  rm -f "$TARGET_SCRIPT"
+fi
+
+# На macOS переподпись
+if [ "$OS" = "Darwin" ]; then
+  echo "✍️ Переподпись приложения..."
+  xattr -cr "$APP_PATH" 2>/dev/null || true
+  codesign --force --deep --sign - "$APP_PATH"
+fi
+
+echo "✅ Русификатор успешно удален. Приложение возвращено в исходное состояние."
