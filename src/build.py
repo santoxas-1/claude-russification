@@ -92,19 +92,25 @@ master.update(TAGGED_RU)
 master.update(SCREENSHOT_TARGETS_RU)
 master.update(NEW_SCREENS_RU)
 
-# Singles from vocabulary
+# Singles from vocabulary:
+# For multi-word phrases, include lowercase.
+# For single-word commands/terms, only include Capitalized/Title forms
+# to prevent DOM-observer from translating CLI commands and code identifiers (e.g. 'update', 'run', 'test').
 for v_en, v_ru in VOCAB_VERBS.items():
-    master.setdefault(v_en, v_ru)
+    if " " in v_en:
+        master.setdefault(v_en, v_ru)
     master.setdefault(v_en.capitalize(), v_ru.capitalize())
     master.setdefault(v_en.title(), v_ru.capitalize())
 
 for n_en, n_ru in VOCAB_NOUNS.items():
-    master.setdefault(n_en, n_ru)
+    if " " in n_en:
+        master.setdefault(n_en, n_ru)
     master.setdefault(n_en.capitalize(), n_ru.capitalize())
     master.setdefault(n_en.title(), n_ru.capitalize())
 
 for a_en, a_ru in VOCAB_ADJ.items():
-    master.setdefault(a_en, a_ru)
+    if " " in a_en:
+        master.setdefault(a_en, a_ru)
     master.setdefault(a_en.capitalize(), a_ru.capitalize())
     master.setdefault(a_en.title(), a_ru.capitalize())
 
@@ -316,7 +322,7 @@ template = """/**
   ];
 
   const IGNORE_TAGS = new Set([
-    'SCRIPT', 'STYLE', 'CODE', 'PRE'
+    'SCRIPT', 'STYLE', 'CODE', 'PRE', 'TEXTAREA', 'INPUT', 'KBD', 'SAMP'
   ]);
 
   function isIgnored(node) {
@@ -324,22 +330,44 @@ template = """/**
     let el = node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement;
     while (el) {
       if (IGNORE_TAGS.has(el.tagName)) return true;
-      if (
-        el.classList &&
-        (el.classList.contains('token') ||
-         el.classList.contains('prism') ||
-         el.classList.contains('monaco-editor') ||
-         el.classList.contains('cm-editor') ||
-         el.classList.contains('prose-pre') ||
-         el.classList.contains('xterm'))
-      ) {
-        return true;
+      if (el.classList) {
+        if (
+          el.classList.contains('token') ||
+          el.classList.contains('prism') ||
+          el.classList.contains('shiki') ||
+          el.classList.contains('line') ||
+          el.classList.contains('monaco-editor') ||
+          el.classList.contains('cm-editor') ||
+          el.classList.contains('prose-pre') ||
+          el.classList.contains('font-mono') ||
+          el.classList.contains('code-block') ||
+          el.classList.contains('whitespace-pre') ||
+          el.classList.contains('whitespace-pre-wrap') ||
+          el.classList.contains('terminal') ||
+          el.classList.contains('xterm') ||
+          el.classList.contains('font-user-message') ||
+          el.classList.contains('font-claude-message') ||
+          el.classList.contains('transcript-row') ||
+          el.classList.contains('transcript-rows') ||
+          el.classList.contains('code_session_transcript') ||
+          el.classList.contains('code_transcript')
+        ) {
+          return true;
+        }
       }
-      if (el.getAttribute && el.getAttribute('data-notranslate') !== null) {
-        return true;
-      }
-      if (el.classList && (el.classList.contains('font-user-message') || el.classList.contains('font-claude-message'))) {
-        return true;
+      if (el.getAttribute) {
+        if (el.getAttribute('data-notranslate') !== null) return true;
+        if (el.hasAttribute('data-transcript-row')) return true;
+        if (el.hasAttribute('data-transcript-list')) return true;
+        if (el.hasAttribute('data-transcript-engine-root')) return true;
+        const testId = el.getAttribute('data-testid');
+        if (testId && (
+          testId.includes('message') ||
+          testId.includes('transcript') ||
+          testId.includes('code')
+        )) {
+          return true;
+        }
       }
       el = el.parentElement;
     }
