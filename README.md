@@ -41,7 +41,7 @@
 Откройте Терминал и выполните:
 
 ```bash
-git clone https://github.com/vlad/claude-russification.git
+git clone https://github.com/teroguy/claude-russification.git
 cd claude-russification
 chmod +x install.sh
 sudo ./install.sh
@@ -62,7 +62,7 @@ open /Applications/Claude.app
 2. Выполните:
 
 ```powershell
-git clone https://github.com/vlad/claude-russification.git
+git clone https://github.com/teroguy/claude-russification.git
 cd claude-russification
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
@@ -74,7 +74,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 ### 🐧 Linux
 
 ```bash
-git clone https://github.com/vlad/claude-russification.git
+git clone https://github.com/teroguy/claude-russification.git
 cd claude-russification
 chmod +x install.sh
 sudo ./install.sh

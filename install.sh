@@ -10,7 +10,7 @@ DIST_DIR="$DIR/dist"
 
 echo "======================================================="
 echo "   Русификатор Claude Desktop (macOS / Linux)"
-echo "   https://github.com/vlad/claude-russification"
+echo "   https://github.com/teroguy/claude-russification"
 echo "======================================================="
 
 # Detect installation path based on OS

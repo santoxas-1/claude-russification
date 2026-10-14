@@ -191,7 +191,7 @@ if dyn_source:
 # 4. Generate i18n-ru.js
 template = """/**
  * Claude Desktop Ultra Russian Localization Engine
- * https://github.com/vlad/claude-russification
+ * https://github.com/teroguy/claude-russification
  */
 (function () {
   'use strict';
