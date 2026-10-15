@@ -6,6 +6,17 @@
   'use strict';
 
   const DICT = {
+  // === Missing Navigation & Dialog Items ===
+  "Usage": "Использование",
+  "Skills": "Навыки",
+  "Plugins": "Плагины",
+  "← Plugins": "← Плагины",
+  "VS Code": "VS Code",
+  "Personal access token": "Персональный токен доступа",
+  "Sync automatically": "Синхронизировать автоматически",
+  "Grant access": "Предоставить доступ",
+  "Connect GitHub": "Подключить GitHub",
+
   // === Screenshots 48-55 Translations ===
   "No matching settings": "Настройки не найдены",
   "Chart": "График",
@@ -3599,6 +3610,31 @@
   "Invite members": "Пригласить участников"
 };
   const FORMATJS_MAP = {
+  "SoyPzQIO1y": "<code>owner/repo</code> на GitHub или URL Git-репозитория.",
+  "bKVjpt662C": "Неверный формат источника каталога. Введите owner/repo на GitHub или полный URL Git-репозитория.",
+  "OOXoZYRqMr": "Введите owner/repo на GitHub или Git-ссылку для синхронизации.",
+  "dKtz/9gcqE": "Синхронизировать",
+  "6ONt+LII3p": "Синхронизировать автоматически",
+  "uBro+8Bjse": "Обновлять плагины автоматически при изменении репозитория на GitHub.",
+  "CLoduU+rl0": "Персональный токен доступа",
+  "fNLMOqBBvM": "Предоставить доступ",
+  "/KCrIas3Oe": "Подключить GitHub",
+  "wvnU7wXlq+": "Для автосинхронизации требуется доступ приложения Claude GitHub к этому репозиторию.",
+  "Pwd1ma2oTi": "Введите корректный URL.",
+  "oQQbRh5O/F": "URL должен начинаться с https://",
+  "9PLxQlkykv": "Не удалось добавить каталог.",
+  "CbhshuK/Kh": "Этот каталог уже добавлен.",
+  "Ih55KeQj+M": "Этот каталог уже есть в вашем списке.",
+  "OKUd/qtI4C": "Репозиторий не найден или недоступен.",
+  "YYOw4a9+Ri": "Каталог не найден. Если это приватный репозиторий на github.com, укажите персональный токен доступа ниже.",
+  "4ptCFopPCK": "Для добавления каталогов требуется Git. Установите Git и перезапустите приложение.",
+  "PYnMqq9Ihf": "Установка в ~/.claude/ — доступно во всех проектах на этом компьютере.",
+  "mjO4YzD0aa": "Установить для меня",
+  "7x5C5AaMTt": "Установка в .claude/ — доступно всей команде через Git.",
+  "PHokHwV6mR": "Установить для проекта (общий)",
+  "8XXYL7ma5x": "Установка в .claude.local/ — личный, добавлен в .gitignore.",
+  "QIM4RpVmXz": "Установить для проекта (личный)",
+
   "dDH5yYnN09": "Метка версии",
   "tYuWoQd428": "Новый заголовок",
   "rJLRsZCnq9": "Разрешить Claude искать тип артефакта?",
@@ -9899,6 +9935,53 @@
   }
 
   const RULES = [
+    // === Universal Relative Timestamps in Cards and Lists ===
+    {
+      regex: /^(.*?)\s*updated\s+(\d+)\s+hours?\s+ago\s*$/i,
+      replace: function (m) {
+        var prefix = m[1] ? m[1] + " " : "";
+        var h = parseInt(m[2], 10);
+        var mod10 = h % 10;
+        var mod100 = h % 100;
+        var word = "часов";
+        if (mod10 === 1 && mod100 !== 11) word = "час";
+        else if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) word = "часа";
+        return prefix + "обновлено " + h + " " + word + " назад";
+      }
+    },
+    {
+      regex: /^(.*?)\s*updated\s+(\d+)\s+minutes?\s+ago\s*$/i,
+      replace: function (m) {
+        var prefix = m[1] ? m[1] + " " : "";
+        var min = parseInt(m[2], 10);
+        var mod10 = min % 10;
+        var mod100 = min % 100;
+        var word = "минут";
+        if (mod10 === 1 && mod100 !== 11) word = "минуту";
+        else if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) word = "минуты";
+        return prefix + "обновлено " + min + " " + word + " назад";
+      }
+    },
+    {
+      regex: /^(.*?)\s*updated\s+(\d+)\s+days?\s+ago\s*$/i,
+      replace: function (m) {
+        var prefix = m[1] ? m[1] + " " : "";
+        var d = parseInt(m[2], 10);
+        var mod10 = d % 10;
+        var mod100 = d % 100;
+        var word = "дней";
+        if (mod10 === 1 && mod100 !== 11) word = "день";
+        else if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) word = "дня";
+        return prefix + "обновлено " + d + " " + word + " назад";
+      }
+    },
+    {
+      regex: /^A GitHub\s+owner\/repo\s+or a Git repository URL\.?$/i,
+      replace: function () {
+        return "owner/repo на GitHub или URL Git-репозитория.";
+      }
+    },
+
     // === Screenshots 48-55 Dynamic Rules ===
     {
       regex: /^Context\s+([0-9.,]+[kKmM]?)\s*\/\s*([0-9.,]+[kKmM]?)\s*(\(\d+%\))?$/i,
