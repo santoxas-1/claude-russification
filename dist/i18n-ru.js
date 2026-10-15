@@ -6,6 +6,55 @@
   'use strict';
 
   const DICT = {
+  "Manage Claude Code plugins": "Управление плагинами Claude Code",
+  "Set the model for this session": "Выбрать модель для этой сессии",
+  "Change the permission mode": "Изменить режим разрешений",
+  "Set the effort level for this session": "Задать уровень рассуждений (effort) для этой сессии",
+  "Set the output style for this session": "Выбрать стиль ответов для этой сессии",
+  "Rename this session": "Переименовать эту сессию",
+  "Add another folder to this session": "Добавить другую папку в эту сессию",
+  "Move this session to a new working directory": "Переместить сессию в новую рабочую директорию",
+  "Show or hide this session’s changes": "Показать или скрыть изменения в этой сессии",
+  "Show this session’s background tasks": "Показать фоновые задачи этой сессии",
+  "Rewind the session to an earlier message": "Откатить сессию к более раннему сообщению",
+  "Fork this session into a new one": "Ответвить (Fork) эту сессию в новую",
+  "Ask a quick side question without adding to the session": "Задать быстрый попутный вопрос без добавления в сессию",
+  "Manage MCP connectors": "Управление MCP-коннекторами",
+  "Browse and manage your skills": "Просмотр и управление вашими навыками",
+  "Send feedback, report a bug, or share your session": "Отправить отзыв, сообщить об ошибке или поделиться сессией",
+  "Switch to plan mode or view this session’s plan": "Переключиться в режим планирования или открыть план сессии",
+  "Export this session’s transcript": "Экспортировать стенограмму этой сессии",
+  "Show plan usage and rate limits": "Показать расход токенов тарифа и лимиты",
+  "Show current context usage": "Показать текущее заполнение контекста",
+  "Turn fast mode on or off": "Включить или выключить быстрый режим",
+  "Open usage settings": "Открыть настройки использования",
+  "Show context usage or set when auto-compact runs": "Показать использование контекста или настроить автосжатие",
+  "Browse workflow history (running and complete)": "Просмотр истории воркфлоу (выполняемых и завершенных)",
+  "Claude will keep these in mind for this and any of your associated accounts across chats and Cowork within": "Claude будет учитывать это для текущего и всех связанных аккаунтов в чатах и Cowork в соответствии с",
+  "Claude will keep these in mind for this and any of your associated accounts across chats and Cowork within ": "Claude будет учитывать это для текущего и всех связанных аккаунтов в чатах и Cowork в соответствии с ",
+  "Claude will keep these in mind for this and any of your associated accounts across Cowork tasks within": "Claude будет учитывать это для текущего и всех связанных аккаунтов в задачах Cowork в соответствии с",
+  "Claude will keep these in mind for this and any of your associated accounts across Cowork tasks within ": "Claude будет учитывать это для текущего и всех связанных аккаунтов в задачах Cowork в соответствии с ",
+  "Anthropic’s guidelines.": "правилами Anthropic.",
+  "Anthropic's guidelines.": "правилами Anthropic.",
+  "Anthropic’s guidelines": "правилами Anthropic",
+  "Anthropic's guidelines": "правилами Anthropic",
+  "No trusted folders yet.": "Доверенных папок пока нет.",
+  "All plugins": "Все плагины",
+  "Sort · Last edited": "Сортировка · Последнее изменение",
+  "Recently updated": "Недавно обновленные",
+  "Name A-Z": "По названию (А–Я)",
+  "Select a repository": "Выберите репозиторий",
+  "A GitHub owner/repo or a Git repository URL.": "owner/repo на GitHub или URL Git-репозитория.",
+  "Sync": "Синхронизировать",
+  "Anthropic sources": "Источники Anthropic",
+  "Curated by Anthropic. Choose which sources to include.": "Отобрано Anthropic. Выберите источники для включения.",
+  "No Anthropic sources available.": "Нет доступных источников Anthropic.",
+  "Added or updated in the last 14 days": "Добавлено или обновлено за последние 14 дней",
+  "Search by issue number or title": "Поиск по номеру задачи или названию",
+  "No issues you’re involved with here. Search to find any issue.": "Здесь нет задач с вашим участием. Используйте поиск, чтобы найти любую задачу.",
+  "No issues you're involved with here. Search to find any issue.": "Здесь нет задач с вашим участием. Используйте поиск, чтобы найти любую задачу.",
+  "Per session": "Для каждой сессии",
+
   "Most capable for ambitious work": "Максимальные возможности для масштабных задач",
   "For your toughest challenges": "Для самых сложных вызовов",
   "For complex work and everyday tasks": "Для комплексной работы и повседневных задач",
@@ -2259,7 +2308,6 @@
   "view": "просмотр",
   "download": "скачать",
   "upload": "загрузить",
-  "export": "экспортировать",
   "import": "импортировать",
   "share": "поделиться",
   "star": "в избранное",
@@ -2271,7 +2319,6 @@
   "Unarchive": "Разархивировать",
   "restore": "восстановить",
   "Restore": "Восстановить",
-  "rename": "переименовать",
   "move": "переместить",
   "duplicate": "дублировать",
   "add": "добавить",
@@ -2379,8 +2426,6 @@
   "Directory": "Каталог",
   "history": "история",
   "recent": "недавние",
-  "model": "модель",
-  "models": "модели",
   "thinking": "размышления",
   "Token": "Токен",
   "Tokens": "Токены",
@@ -2388,8 +2433,6 @@
   "limit": "лимит",
   "Limit": "Лимит",
   "limits": "лимиты",
-  "billing": "оплата",
-  "plan": "тариф",
   "plans": "тарифы",
   "tool": "инструмент",
   "Tool": "Инструмент",
@@ -2397,14 +2440,10 @@
   "connector": "коннектор",
   "Connector": "Коннектор",
   "connectors": "коннекторы",
-  "plugin": "плагин",
   "Plugin": "Плагин",
-  "plugins": "плагины",
   "skill": "навык",
   "Skill": "Навык",
-  "skills": "навыки",
   "task": "задача",
-  "tasks": "задачи",
   "session": "сессия",
   "Session": "Сессия",
   "sessions": "сессии",
@@ -2417,7 +2456,6 @@
   "Info": "Информация",
   "help": "справка",
   "shortcuts": "горячие клавиши",
-  "permissions": "разрешения",
   "privacy": "конфиденциальность",
   "appearance": "внешний вид",
   "theme": "тема",
@@ -2521,6 +2559,52 @@
   "Invite members": "Пригласить участников"
 };
   const FORMATJS_MAP = {
+  "0jPoCTWaT8": "Создать запланированную задачу, которую можно запускать по требованию или автоматически по расписанию",
+  "4Iu0xDY9v4": "Задать быстрый попутный вопрос без добавления в сессию",
+  "im+fV1gXT4": "Запустить удаленную сессию Ultrareview для этого репозитория",
+  "qp1Y3ko7m2": "Откатить сессию к более раннему сообщению",
+  "PLA5A7IBXa": "Ответвить (Fork) эту сессию в новую",
+  "5B10ybRftQ": "Ответвить сессию для работы над задачей, оставаясь в текущей",
+  "i1j0okYTaw": "Управление MCP-коннекторами",
+  "H6wXnXH4FN": "Управление MCP-серверами этой сессии",
+  "wpALlbVBy7": "Управление плагинами Claude Code",
+  "NoJhhT4ajs": "Просмотр и управление вашими навыками",
+  "ROWC/dVxTx": "Отправить отзыв, сообщить об ошибке или поделиться сессией",
+  "Dd2QGejip9": "Выбрать модель для этой сессии",
+  "vDC8hqKsFP": "Переключиться в режим планирования или открыть план сессии",
+  "TtDrZ3njdX": "Переименовать эту сессию",
+  "lf3xK1KDea": "Экспортировать стенограмму этой сессии",
+  "h4Tq920W/Z": "Добавить другую папку в эту сессию",
+  "O5XKAMPRrM": "Переместить сессию в новую рабочую директорию",
+  "BymdttQBa1": "Показать или скрыть изменения в этой сессии",
+  "+vginKit6A": "Показать фоновые задачи этой сессии",
+  "x1XndMSihP": "Показать расход токенов тарифа и лимиты",
+  "59puvF+dPg": "Показать текущее заполнение контекста",
+  "kXktj/cq6M": "Настроить оформление (системное, светлое или темное)",
+  "ACsVE4t8Jz": "Открыть pull request для ветки этой сессии",
+  "EdGhWN5pVT": "Найти и продолжить сессию Claude Code с этого компьютера",
+  "StnyicIZMN": "Показать версию, модель, окружение и аккаунт этой сессии",
+  "VHP1V5Y2tY": "Разрешить Claude консультироваться с более мощной моделью в ключевые моменты",
+  "V5xsNvc+al": "Изменить режим разрешений",
+  "ahsycWoxUQ": "Задать уровень рассуждений (effort) для этой сессии",
+  "1Iil9SAPHl": "Включить или выключить быстрый режим",
+  "sLN5P3cZhl": "Открыть настройки использования",
+  "ntBDs3AvHQ": "Показать использование контекста или настроить автосжатие",
+  "3H222xW+Yd": "Просмотр истории воркфлоу (выполняемых и завершенных)",
+  "4txo620/Yp": "Доверенных папок пока нет.",
+  "UBMzPFn5JP": "Все плагины",
+  "ie/Tbp2rnv": "Недавно обновленные",
+  "9wooBlZIGJ": "По названию (А–Я)",
+  "ccutb7fdKu": "Убедитесь, что вы доверяете плагину, перед его установкой, обновлением или использованием. Плагины, установленные из каталогов, не контролируются Anthropic, и компания не может гарантировать, что они будут работать должным образом или не изменятся. Дополнительную информацию см. на странице каждого плагина.",
+  "2dl2GFk94u": "Выберите репозиторий",
+  "OM1Xt60kRs": "Выберите репозиторий",
+  "0U9UIrGCGt": "Источники Anthropic",
+  "R/p8Jr8LKw": "Отобрано Anthropic. Выберите источники для включения.",
+  "mkqoCnt2bq": "Нет доступных источников Anthropic.",
+  "Am+9xKZDLW": "Поиск по номеру задачи или названию",
+  "s8jW+Dp1Mx": "Здесь нет задач с вашим участием. Используйте поиск, чтобы найти любую задачу.",
+  "pFAA1bn62c": "Для каждой сессии",
+
   "sEcfVaSh1G": "Подключите GitHub в Настройках или выполните gh auth login",
   "klYQCm25/j": "Новая локальная задача",
   "4aL/3wWUgg": "Локальные рутины выполняются, только когда ваш компьютер активен и в сети.",
@@ -7722,6 +7806,44 @@
   }
 
   const RULES = [
+    {
+      regex: /^Sort\s*·\s*Last edited$/i,
+      replace: function () { return "Сортировка · Последнее изменение"; }
+    },
+    {
+      regex: /^Added or updated in the last (\d+) days?$/i,
+      replace: function (m) { return "Добавлено или обновлено за последние " + m[1] + " дн."; }
+    },
+    {
+      regex: /^(\d+)h ago$/i,
+      replace: function (m) { return m[1] + " ч. назад"; }
+    },
+    {
+      regex: /^(\d+)m ago$/i,
+      replace: function (m) { return m[1] + " мин. назад"; }
+    },
+    {
+      regex: /^(\d+)d ago$/i,
+      replace: function (m) { return m[1] + " дн. назад"; }
+    },
+    {
+      regex: /^updated\s+(\d+)\s+hours?\s+ago$/i,
+      replace: function (m) { return "обновлено " + m[1] + " ч. назад"; }
+    },
+    {
+      regex: /^updated\s+(\d+)\s+minutes?\s+ago$/i,
+      replace: function (m) { return "обновлено " + m[1] + " мин. назад"; }
+    },
+    {
+      regex: /^from (.*) · (.*) · updated (.*)$/i,
+      replace: function (m) {
+        var t = m[3]
+          .replace(/(\d+)\s+hours?\s+ago/i, '$1 ч. назад')
+          .replace(/(\d+)\s+minutes?\s+ago/i, '$1 мин. назад');
+        return "из " + m[1] + " · " + m[2] + " · обновлено " + t;
+      }
+    },
+
     {
       regex: /^What['’]s up next,?\s*(.*?)\?$/i,
       replace: function (m) { return m[1] ? ("Что дальше, " + m[1] + "?") : "Что дальше?"; }
