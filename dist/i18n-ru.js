@@ -46,7 +46,6 @@
   "Set the prompt bar color for this session": "Установить цвет строки ввода промпта для этой сессии",
   "Free up context by summarizing the conversation so far": "Освободить контекст путем суммаризации текущего диалога",
   "Set a setting by key": "Задать параметр по ключу",
-  "code-review": "код-ревью",
   "Use this skill whenever you are about to create ANY chart, graph, plot, dashboard, or data visualization, in ANY output medium — an HTML or React artifact, inline SVG, plotting code in any library (matplotlib, plotly, d3, Recharts, ...), an image/PNG you will render and upload, or a chart shared into Slack. Read it BEFORE writing the first line of chart code, choosing chart colors, building a stat tile / meter / KPI row, or laying out a dashboard. When the destination is a first-party document connector (host-designated, never self-described) that renders live charts, hand it the rows (inline, or as an uploaded data file the chart cites) rather than a rendered PNG/SVG — a picture of a chart loses hover, data inspecti...": "Используйте этот навык всякий раз перед созданием ЛЮБОЙ диаграммы, графика, плота, дашборда или визуализации данных на ЛЮБОМ носителе — артефакт HTML или React, встроенный SVG, код построения графиков в любой библиотеке (matplotlib, plotly, d3, Recharts, …), отрендеренное и загруженное изображение/PNG или диаграмма для отправки в Slack. Ознакомьтесь с навыком ДО написания первой строки кода диаграммы, выбора цветовой гаммы, создания плитки статистики / индикатора / строки KPI или компоновки дашборда. Если местом назначения является коннектор документов первого уровня (определяемый хостом), поддерживающий интерактивные графики, передавайте ему строки данных (встроенные или в виде загруженного файла данных, на который ссылается график), а не статичное изображение PNG/SVG — картинка графика лишена всплывающих подсказок, проверки данных и комментариев к отдельным значениям...",
   "Enable debug logging for this session and help diagnose issues": "Включить ведение журнала отладки для этой сессии и помочь в диагностике проблем",
   "Deep research harness — fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report. (dynamic workflow)": "Среда глубокого исследования — параллельный веб-поиск, получение источников, состязательная проверка утверждений, синтез отчета со ссылками. (динамический процесс)",
@@ -10268,6 +10267,8 @@
 
   
   const COMMAND_NAMES_SET = new Set([
+    "code-review", "pr-comments", "release-notes", "security-review",
+
     "compact", "config", "context", "dataviz", "debug", "deep-research", "doctor",
     "init", "review", "simplify", "verify", "run", "cost", "billing", "model",
     "plugin", "plugins", "effort", "recap", "theme", "status", "tasks", "usage", "help",
