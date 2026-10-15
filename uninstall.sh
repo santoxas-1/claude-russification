@@ -94,6 +94,19 @@ if [ -f "$TARGET_SCRIPT" ]; then
   rm -f "$TARGET_SCRIPT"
 fi
 
+
+# Очистка секции русификации из ~/.claude/CLAUDE.md без потери пользовательских данных
+USER_DATA_DIR="${SUDO_USER:-$USER}"
+USER_HOME=$(eval echo "~$USER_DATA_DIR")
+GLOBAL_CLAUDE_MD="$USER_HOME/.claude/CLAUDE.md"
+MARKER="<!-- CLAUDE-RUSSIFICATION-THINKING-CONFIG -->"
+
+if [ -f "$GLOBAL_CLAUDE_MD" ] && grep -q "$MARKER" "$GLOBAL_CLAUDE_MD"; then
+  echo "🧹 Очистка секции русского мышления из ~/.claude/CLAUDE.md..."
+  sed -i.bak '/<!-- CLAUDE-RUSSIFICATION-THINKING-CONFIG -->/,/<!-- END-CLAUDE-RUSSIFICATION-THINKING-CONFIG -->/d' "$GLOBAL_CLAUDE_MD" 2>/dev/null || true
+  rm -f "$GLOBAL_CLAUDE_MD.bak" 2>/dev/null || true
+fi
+
 # На macOS переподпись
 if [ "$OS" = "Darwin" ]; then
   echo "✍️ Переподпись приложения..."

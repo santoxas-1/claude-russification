@@ -186,8 +186,27 @@ if (-not $KeepShortcuts) {
     }
 }
 
+
 # -------------------------------------------------------------
-# 7. Очистка кэша Chromium
+# 7. Очистка секции русификации из ~/.claude/CLAUDE.md
+# Удаляет ТОЛЬКО добавленные инструкции, сохраняя все файлы пользователя!
+# -------------------------------------------------------------
+$GlobalClaudeMd = Join-Path $env:USERPROFILE ".claude\CLAUDE.md"
+if (Test-Path $GlobalClaudeMd) {
+    $Content = [System.IO.File]::ReadAllText($GlobalClaudeMd, [System.Text.Encoding]::UTF8)
+    if ($Content -match "<!-- CLAUDE-RUSSIFICATION-THINKING-CONFIG -->") {
+        Write-Host "🧹 Очистка секции русского мышления из ~/.claude/CLAUDE.md..." -ForegroundColor Yellow
+        $Cleaned = $Content -replace "(?s)\r?\n?<!-- CLAUDE-RUSSIFICATION-THINKING-CONFIG -->.*?<!-- END-CLAUDE-RUSSIFICATION-THINKING-CONFIG -->\r?\n?", ""
+        if ([string]::IsNullOrWhiteSpace($Cleaned)) {
+            Remove-Item $GlobalClaudeMd -Force -ErrorAction SilentlyContinue
+        } else {
+            [System.IO.File]::WriteAllText($GlobalClaudeMd, $Cleaned, [System.Text.Encoding]::UTF8)
+        }
+    }
+}
+
+# -------------------------------------------------------------
+# 8. Очистка кэша Chromium
 # -------------------------------------------------------------
 $CacheLocations = @(
     "$env:APPDATA\Claude",

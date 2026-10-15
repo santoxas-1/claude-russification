@@ -128,7 +128,39 @@ else
   echo "ℹ️ Скрипт i18n-ru.js уже подключен в index.html"
 fi
 
-# 7. Очистка кэша Chromium
+
+# 7. Настройка русского языка для рассуждений (Thinking) в Claude Code
+# Не перезаписывает файл пользователя, а аккуратно дополняет его!
+GLOBAL_CLAUDE_DIR="$USER_HOME/.claude"
+GLOBAL_CLAUDE_MD="$GLOBAL_CLAUDE_DIR/CLAUDE.md"
+MARKER="<!-- CLAUDE-RUSSIFICATION-THINKING-CONFIG -->"
+
+mkdir -p "$GLOBAL_CLAUDE_DIR" 2>/dev/null || true
+
+if [ -f "$GLOBAL_CLAUDE_MD" ]; then
+  if ! grep -q "$MARKER" "$GLOBAL_CLAUDE_MD"; then
+    echo "📝 Дополнение глобальных инструкций Claude Code (~/.claude/CLAUDE.md)..."
+    cat << 'EOF' >> "$GLOBAL_CLAUDE_MD"
+
+<!-- CLAUDE-RUSSIFICATION-THINKING-CONFIG -->
+## Языковые инструкции (Language Preference)
+- Все внутренние рассуждения (Thinking / Chain of Thought), ход мыслей, промежуточный анализ и шаги планирования ВСЕГДА ведутся исключительно на русском языке.
+- Ответы и выводы пользователю формулируются на русском языке. Код, системные идентификаторы и имена команд остаются на английском.
+<!-- END-CLAUDE-RUSSIFICATION-THINKING-CONFIG -->
+EOF
+  fi
+else
+  echo "📝 Создание глобальных инструкций Claude Code (~/.claude/CLAUDE.md)..."
+  cat << 'EOF' > "$GLOBAL_CLAUDE_MD"
+<!-- CLAUDE-RUSSIFICATION-THINKING-CONFIG -->
+## Языковые инструкции (Language Preference)
+- Все внутренние рассуждения (Thinking / Chain of Thought), ход мыслей, промежуточный анализ и шаги планирования ВСЕГДА ведутся исключительно на русском языке.
+- Ответы и выводы пользователю формулируются на русском языке. Код, системные идентификаторы и имена команд остаются на английском.
+<!-- END-CLAUDE-RUSSIFICATION-THINKING-CONFIG -->
+EOF
+fi
+
+# 8. Очистка кэша Chromium
 if [ -d "$CACHE_DIR" ]; then
   echo "🧹 Очистка браузерного кэша приложения..."
   rm -rf "$CACHE_DIR/Cache"/* 2>/dev/null || true
@@ -136,7 +168,7 @@ if [ -d "$CACHE_DIR" ]; then
   rm -rf "$CACHE_DIR/GPUCache"/* 2>/dev/null || true
 fi
 
-# 8. На macOS переподписываем приложение
+# 9. На macOS переподписываем приложение
 if [ "$OS" = "Darwin" ]; then
   echo "✍️ Подпись приложения ad-hoc сертификатом (codesign)..."
   codesign --force --deep --sign - "$APP_PATH"

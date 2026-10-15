@@ -330,8 +330,42 @@ if ($ClaudeExePath -and (-not $NoShortcut)) {
     }
 }
 
+
 # -------------------------------------------------------------
-# 8. Очистка браузерного кэша Chromium
+# 8. Настройка русского языка для рассуждений (Thinking) в Claude Code
+# ВАЖНО: не перезаписывает файл пользователя, а аккуратно дополняет его!
+# -------------------------------------------------------------
+$GlobalClaudeDir = Join-Path $env:USERPROFILE ".claude"
+if (-not (Test-Path $GlobalClaudeDir)) {
+    New-Item -ItemType Directory -Path $GlobalClaudeDir -Force | Out-Null
+}
+
+$GlobalClaudeMd = Join-Path $GlobalClaudeDir "CLAUDE.md"
+$RussianRuleMarker = "<!-- CLAUDE-RUSSIFICATION-THINKING-CONFIG -->"
+$RussianRuleContent = @"
+
+$RussianRuleMarker
+## Языковые инструкции (Language Preference)
+- Все внутренние рассуждения (Thinking / Chain of Thought), ход мыслей, промежуточный анализ и шаги планирования ВСЕГДА ведутся исключительно на русском языке.
+- Ответы и выводы пользователю формулируются на русском языке. Код, системные идентификаторы и имена команд остаются на английском.
+<!-- END-CLAUDE-RUSSIFICATION-THINKING-CONFIG -->
+"@
+
+if (Test-Path $GlobalClaudeMd) {
+    $ExistingContent = [System.IO.File]::ReadAllText($GlobalClaudeMd, [System.Text.Encoding]::UTF8)
+    if ($ExistingContent -notmatch "CLAUDE-RUSSIFICATION-THINKING-CONFIG") {
+        Write-Host "📝 Дополнение глобальных инструкций Claude Code (~/.claude/CLAUDE.md)..." -ForegroundColor Yellow
+        [System.IO.File]::AppendAllText($GlobalClaudeMd, [Environment]::NewLine + $RussianRuleContent, [System.Text.Encoding]::UTF8)
+    } else {
+        Write-Host "ℹ️ Инструкции русского мышления уже присутствуют в ~/.claude/CLAUDE.md." -ForegroundColor Gray
+    }
+} else {
+    Write-Host "📝 Создание глобальных инструкций Claude Code (~/.claude/CLAUDE.md)..." -ForegroundColor Yellow
+    [System.IO.File]::WriteAllText($GlobalClaudeMd, $RussianRuleContent.TrimStart(), [System.Text.Encoding]::UTF8)
+}
+
+# -------------------------------------------------------------
+# 9. Очистка браузерного кэша Chromium
 # -------------------------------------------------------------
 $CacheLocations = @(
     "$env:APPDATA\Claude",
