@@ -41,7 +41,7 @@
 Откройте Терминал и выполните:
 
 ```bash
-git clone https://github.com/teroguy/claude-russification.git
+git clone https://github.com/vlad/claude-russification.git
 cd claude-russification
 chmod +x install.sh
 sudo ./install.sh
@@ -62,19 +62,22 @@ open /Applications/Claude.app
 2. Выполните:
 
 ```powershell
-git clone https://github.com/teroguy/claude-russification.git
+git clone https://github.com/vlad/claude-russification.git
 cd claude-russification
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
-После завершения запустите Claude Desktop из меню «Пуск».
+> **Особенности работы на Windows**:
+> * **Безопасное завершение процессов**: скрипт завершает исключительно GUI-клиент Claude Desktop и не прерывает фоновые процессы Claude Code CLI / субпроцессы агентов.
+> * **Поддержка Windows 10/11 и Microsoft Store (WindowsApps / MSIX)**: если Claude установлен через Windows Store / MSIX, прямая модификация файлов невозможна из-за защиты цифровой подписью Windows. Скрипт автоматически распознает это и создает независимую рабочую standalone-копию в `%LOCALAPPDATA%\Programs\Claude`, после чего русифицирует её и создает ярлык **«Claude (Русский)»** на Рабочем столе и в меню «Пуск».
+> * **Очистка кэша**: автоматически удаляет старый кэш Chromium / Electron из AppData и LocalAppData, исключая артефакты старого интерфейса.
 
 ---
 
 ### 🐧 Linux
 
 ```bash
-git clone https://github.com/teroguy/claude-russification.git
+git clone https://github.com/vlad/claude-russification.git
 cd claude-russification
 chmod +x install.sh
 sudo ./install.sh

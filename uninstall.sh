@@ -46,10 +46,22 @@ BACKUP_EN="$I18N_DIR/en-US.json.original"
 BACKUP_DYN="$DYN_I18N_DIR/en-US.json.original"
 TARGET_SCRIPT="$ION_DIR/i18n-ru.js"
 
-if pgrep -x "Claude" > /dev/null 2>&1 || pgrep -x "claude" > /dev/null 2>&1; then
-  echo "⏳ Завершаем процесс Claude..."
-  pkill -x "Claude" 2>/dev/null || true
-  pkill -x "claude" 2>/dev/null || true
+# Безопасное завершение Claude Desktop (не трогает Claude Code CLI)
+echo "⏳ Проверка запущенных процессов Claude Desktop..."
+if [ "$OS" = "Darwin" ]; then
+  pkill -f "/Applications/Claude.app/Contents/MacOS/Claude" 2>/dev/null || true
+  sleep 1
+elif [ "$OS" = "Linux" ]; then
+  for pid in $(pgrep -f "claude" 2>/dev/null || true); do
+    exe_target=$(readlink -f "/proc/$pid/exe" 2>/dev/null || true)
+    cmdline=$(tr '\0' ' ' < "/proc/$pid/cmdline" 2>/dev/null || true)
+    if [[ "$cmdline" =~ claude-code|\.claude|node_modules|npm ]]; then
+      continue
+    fi
+    if [[ "$cmdline" =~ ion-dist|app\.asar|--type=renderer ]] || [[ "$exe_target" =~ /opt/|/usr/lib/claude ]]; then
+      kill -TERM "$pid" 2>/dev/null || true
+    fi
+  done
   sleep 1
 fi
 

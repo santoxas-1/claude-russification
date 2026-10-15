@@ -10,7 +10,7 @@ DIST_DIR="$DIR/dist"
 
 echo "======================================================="
 echo "   Русификатор Claude Desktop (macOS / Linux)"
-echo "   https://github.com/teroguy/claude-russification"
+echo "   https://github.com/vlad/claude-russification"
 echo "======================================================="
 
 # Detect installation path based on OS
@@ -63,11 +63,23 @@ PATCHED_EN="$DIST_DIR/en-US.json"
 PATCHED_DYN="$DIST_DIR/dynamic/en-US.json"
 SCRIPT_SRC="$DIST_DIR/i18n-ru.js"
 
-# 1. Завершение работы Claude, если запущен
-if pgrep -x "Claude" > /dev/null 2>&1 || pgrep -x "claude" > /dev/null 2>&1; then
-  echo "⏳ Завершаем запущенный процесс Claude..."
-  pkill -x "Claude" 2>/dev/null || true
-  pkill -x "claude" 2>/dev/null || true
+# 1. Безопасное завершение работы Claude Desktop (не трогает Claude Code CLI)
+echo "⏳ Проверка запущенных процессов Claude Desktop..."
+if [ "$OS" = "Darwin" ]; then
+  pkill -f "/Applications/Claude.app/Contents/MacOS/Claude" 2>/dev/null || true
+  sleep 1
+elif [ "$OS" = "Linux" ]; then
+  # Завершаем только процессы Electron Desktop, не трогая Claude Code CLI / Agent SDK
+  for pid in $(pgrep -f "claude" 2>/dev/null || true); do
+    exe_target=$(readlink -f "/proc/$pid/exe" 2>/dev/null || true)
+    cmdline=$(tr '\0' ' ' < "/proc/$pid/cmdline" 2>/dev/null || true)
+    if [[ "$cmdline" =~ claude-code|\.claude|node_modules|npm ]]; then
+      continue
+    fi
+    if [[ "$cmdline" =~ ion-dist|app\.asar|--type=renderer ]] || [[ "$exe_target" =~ /opt/|/usr/lib/claude ]]; then
+      kill -TERM "$pid" 2>/dev/null || true
+    fi
+  done
   sleep 1
 fi
 
