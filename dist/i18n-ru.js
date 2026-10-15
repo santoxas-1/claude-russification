@@ -44,39 +44,20 @@
   "Reference for the Claude API / Anthropic SDK — model ids, pricing, params, streaming, tool use, MCP, agents, caching, token counting, model migration. TRIGGER — read BEFORE opening the target file; don't skip because it \"looks like a one-liner\" — whenever: the prompt names Claude/Anthropic in any form (Claude, Anthropic, Fable, Opus, Sonnet, Haiku, `anthropic`, `@anthropic-ai`, `claude-*`, `us.anthropic.*`, `[1m]`); the user asks about an LLM (pricing/model choice/limits/caching) — never answer from memory; OR the task is LLM-shaped with provider unstated (agent/MCP/tool-definition/multi-agent/RAG/LLM-judge/computer-use; generate/summarize/extract/classify/rewrite/converse over NL; debugging refusals/cutoffs/streaming/tool-calls/tokens). SKIP only when another provider is being worked on (overrides all triggers): OpenAI/GPT/Gemini/Llama/Mistral/Cohere/Ollama named in the query; OR `grep -rE 'openai|langchain_openai|google.generativeai|genai|mistralai|cohere|ollama'` over the project hits (run this grep FIRST if no provider named — don't Read the file).": "Справочник по Claude API / Anthropic SDK — идентификаторы моделей, цены, параметры, стриминг, использование инструментов, MCP, агенты, кэширование, подсчет токенов, миграция моделей. ТРИГГЕР — прочитайте ДО открытия целевого файла; не пропускайте, даже если кажется простой задачей — всякий раз, когда: в запросе упоминается Claude/Anthropic в любой форме (Claude, Anthropic, Fable, Opus, Sonnet, Haiku, `anthropic`, `@anthropic-ai`, `claude-*`, `us.anthropic.*`, `[1m]`); пользователь спрашивает об LLM (цены/выбор модели/лимиты/кэширование) — никогда не отвечайте по памяти; ЛИБО задача связана с LLM без указания провайдера (агент/MCP/определение инструментов/мультиагентные системы/RAG/LLM-оценка/computer-use; генерация/обобщение/извлечение/классификация/переписывание/общение на естественном языке; отладка отказов/обрезания текста/стриминга/вызовов инструментов/токенов). ПРОПУСКАТЬ только если идет работа с другим провайдером (переопределяет все триггеры): OpenAI/GPT/Gemini/Llama/Mistral/Cohere/Ollama указаны в запросе; ЛИБО поиск по проекту `grep -rE 'openai|langchain_openai|google.generativeai|genai|mistralai|cohere|ollama'` дает результаты (выполните этот grep ПЕРВЫМ, если провайдер не указан — не читайте файл).",
   "Review the current diff, or a PR number/branch/path target, for correctness bugs (plus reuse/simplification/efficiency cleanups where the model’s review recipe covers them) at the given effort level (low|medium|high|xhigh|max: from few high-confidence findings up to many, some of them uncertain); with no level given, it reuses the level you typed last. Pass --comment to post findings as inline PR comments, or --fix to apply the findings to the working tree after the review. Pass --max-findings <n> to report up to n findings, or --max-findings all for every finding. The choice stays until you pass --max-findings default.": "Провести ревью текущего diff или указанного PR/ветки/пути на наличие ошибок корректности (а также оптимизаций переиспользования/упрощения/эффективности, если они предусмотрены рецептом модели) с заданным уровнем усилий (low|medium|high|xhigh|max: от небольшого числа высокодостоверных замечаний до множества, часть из которых вероятностные); если уровень не указан, используется ранее введенный. Передайте флаг --comment для отправки замечаний инлайн-комментариями в PR или --fix для автоматического применения правок в рабочее дерево после ревью. Передайте --max-findings <n> для ограничения до n замечаний или --max-findings all для всех замечаний. Выбор сохраняется до передачи --max-findings default.",
   "Set the prompt bar color for this session": "Установить цвет строки ввода промпта для этой сессии",
-  "compact": "сжатие",
   "Free up context by summarizing the conversation so far": "Освободить контекст путем суммаризации текущего диалога",
-  "config": "конфигурация",
   "Set a setting by key": "Задать параметр по ключу",
-  "claude-api": "claude-api",
   "code-review": "код-ревью",
-  "color": "цвет",
-  "context": "контекст",
-  "dataviz": "визуализация данных",
   "Use this skill whenever you are about to create ANY chart, graph, plot, dashboard, or data visualization, in ANY output medium — an HTML or React artifact, inline SVG, plotting code in any library (matplotlib, plotly, d3, Recharts, ...), an image/PNG you will render and upload, or a chart shared into Slack. Read it BEFORE writing the first line of chart code, choosing chart colors, building a stat tile / meter / KPI row, or laying out a dashboard. When the destination is a first-party document connector (host-designated, never self-described) that renders live charts, hand it the rows (inline, or as an uploaded data file the chart cites) rather than a rendered PNG/SVG — a picture of a chart loses hover, data inspecti...": "Используйте этот навык всякий раз перед созданием ЛЮБОЙ диаграммы, графика, плота, дашборда или визуализации данных на ЛЮБОМ носителе — артефакт HTML или React, встроенный SVG, код построения графиков в любой библиотеке (matplotlib, plotly, d3, Recharts, …), отрендеренное и загруженное изображение/PNG или диаграмма для отправки в Slack. Ознакомьтесь с навыком ДО написания первой строки кода диаграммы, выбора цветовой гаммы, создания плитки статистики / индикатора / строки KPI или компоновки дашборда. Если местом назначения является коннектор документов первого уровня (определяемый хостом), поддерживающий интерактивные графики, передавайте ему строки данных (встроенные или в виде загруженного файла данных, на который ссылается график), а не статичное изображение PNG/SVG — картинка графика лишена всплывающих подсказок, проверки данных и комментариев к отдельным значениям...",
-  "debug": "отладка",
   "Enable debug logging for this session and help diagnose issues": "Включить ведение журнала отладки для этой сессии и помочь в диагностике проблем",
-  "deep-research": "глубокое исследование",
   "Deep research harness — fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report. (dynamic workflow)": "Среда глубокого исследования — параллельный веб-поиск, получение источников, состязательная проверка утверждений, синтез отчета со ссылками. (динамический процесс)",
-  "doctor": "диагностика",
   "Health-check the user's Claude Code setup and fix issues: diagnose installation health — what the `claude doctor` terminal diagnostics cover — from local data (duplicate or leftover installs, PATH, unparseable settings files, broken or colliding agent definitions, skills whose frontmatter fails to parse); find unused skills, MCP servers, and plugins versus their context cost and disable dead weight; deduplicate local CLAUDE.md files against checked-in ones; trim checked-in CLAUDE.md files by cutting content a session could derive from the codebase (directory layouts, tech-stack lists, architecture overviews) while keeping gotchas, rationale, and non-standard conventions;...": "Проверить состояние установки Claude Code пользователя и устранить проблемы: диагностировать состояние установки — то, что охватывает терминальная диагностика `claude doctor` — на основе локальных данных (дубликаты или остатки установок, PATH, нечитаемые файлы настроек, поврежденные или конфликтующие определения агентов, навыки с нечитаемым frontmatter); найти неиспользуемые навыки, MCP-серверы и плагины по сравнению с их расходом контекста и отключить лишний груз; устранить дублирование локальных файлов CLAUDE.md относительно зафиксированных в репозитории; сократить зафиксированные файлы CLAUDE.md, удалив контент, который сессия может извлечь из кодовой базы (структуру каталогов, списки техстека, обзоры архитектуры), сохранив нюансы, обоснования и нестандартные соглашения;...",
-  "effort": "уровень усилий",
   "Set effort level for model usage": "Установить уровень усилий для использования модели",
-  "fewer-permission-prompts": "меньше запросов разрешений",
-  "focus": "режим фокуса",
   "Toggle focus view: just your prompt, summary, and response": "Переключить режим фокуса: только ваш запрос, краткое содержание и ответ",
-  "goal": "поставить цель",
   "Set a goal — keep working until the condition is met": "Поставить цель — продолжать работу до выполнения условия",
-  "heapdump": "дамп памяти",
   "Dump the JS heap to the Desktop; on Linux with no Desktop folder, the home directory": "Сбросить JS-дамп памяти на Рабочий стол; в Linux при отсутствии папки Рабочего стола — в домашний каталог",
-  "init": "инициализация",
-  "insights": "аналитика",
   "Generate a report analyzing your Claude Code sessions": "Сгенерировать отчет с анализом ваших сессий Claude Code",
-  "list-agents": "список агентов",
   "List subagents, teammates, and other Claude sessions you can message": "Показать список субагентов, участников команды и других сессий Claude, которым можно отправить сообщение",
-  "loop": "цикл",
   "Run a prompt or slash command on a recurring interval (e.g. /loop 5m /foo). Omit the interval to let the model self-pace.": "Запускать запрос или слэш-команду с повторяющимся интервалом (например, /loop 5m /foo). Опустите интервал, чтобы модель сама регулировала темп.",
-  "plugin-authoring": "разработка плагинов",
   "Make a mod: a change to Claude’s own interface or behaviour, such as a live pane or panel, a band above the prompt, a status line, a toast, a slash command, or a hook on tool calls or prompts. Use to make, change or debug a mod or its hooks module.": "Создать мод: изменение собственного интерфейса или поведения Claude, например интерактивная панель, строка над полем ввода, строка состояния, всплывающее уведомление (toast), команда со слэшем или хук на вызовы инструментов либо промптов. Используйте для создания, изменения или отладки мода или его модуля хуков.",
   "Generate a one-line session recap now": "Создать краткую сводку сессии в одну строку сейчас",
   "Activate pending plugin changes in the current session": "Активировать ожидающие изменения плагина в текущей сессии",
@@ -88,7 +69,6 @@
   "Verify that a code change actually does what it's supposed to by exercising it end-to-end and observing behavior — drive the affected flow, not just tests or typecheck. Run before committing nontrivial changes; bootstraps this repo's project verify skill if none exists yet. Don't invoke it on a diff that only touches tests, docs, or other code with no runtime surface to drive (a change to product source always has one) — there's nothing to observe.": "Убедиться, что изменение кода действительно выполняет то, что задумано, запустив сквозной сценарий и наблюдая за поведением — протестируйте затронутый поток, а не только тесты или проверку типов. Запускайте перед фиксацией нетривиальных изменений; инициализирует проектный навык verify для этого репозитория, если он еще не существует. Не вызывайте при диффе, затрагивающем только тесты, документацию или другой код без исполняемой рабочей среды (изменение исходного кода продукта всегда ее имеет) — здесь не за чем наблюдать.",
   "Execute a server-launched workflow handoff (workflow_launch event sessions only)": "Выполнить передачу рабочего процесса, запущенного сервером (только для сессий событий workflow_launch)",
   "Open in": "Открыть в",
-  "Fork": "Ответвить",
   "Transcript view": "Вид стенограммы",
   "New window": "Новое окно",
   "Explorer": "Проводник",
@@ -1188,9 +1168,7 @@
   "Review yesterday’s commits and flag anything concerning": "Проверить вчерашние коммиты и отметить подозрительные моменты",
   "Review yesterday's commits and flag anything concerning": "Проверить вчерашние коммиты и отметить подозрительные моменты",
   "Look at the commits from the last 24 hours. Summarize what changed, call out any risky patterns or missing tests, and note anything worth following up on.": "Изучите коммиты за последние 24 часа. Составьте сводку изменений, выделите рискованные паттерны или отсутствующие тесты и отметьте всё, на что стоит обратить внимание.",
-  "Select folder": "Выбрать папку",
-  "Schedule": "Расписание",
-  "Weekdays": "По будням",
+  "Select folder": "Выбрать папку",  "Weekdays": "По будням",
   "Routines use a randomized delay of several minutes for server performance.": "Рутины запускаются со случайной задержкой в несколько минут для оптимизации нагрузки на сервер.",
   "Create a skill": "Создать навык",
   "Skill name": "Название навыка",
@@ -1347,12 +1325,8 @@
   "Default": "По умолчанию",
   "Ask before making changes": "Спрашивать перед внесением изменений",
   "Inference": "Инференс",
-  "Inference provider": "Провайдер инференса",
-  "Model": "Модель",
-  "Select a model": "Выберите модель",
-  "Fast mode": "Быстрый режим",
-  "Effort": "Уровень рассуждений",
-  "Effort level": "Уровень рассуждений",
+  "Inference provider": "Провайдер инференса",  "Select a model": "Выберите модель",
+  "Fast mode": "Быстрый режим",  "Effort level": "Уровень рассуждений",
   "Low": "Низкий",
   "Medium": "Средний",
   "High": "Высокий",
@@ -1366,14 +1340,8 @@
   "Remove header": "Удалить заголовок",
   "Routing and tenant headers only": "Только заголовки маршрутизации и тенантов",
   "Session permissions": "Разрешения сессии",
-  "Permission mode": "Режим разрешений",
-  "Permissions": "Разрешения",
-  "Terminal": "Терминал",
-  "Files": "Файлы",
-  "Diff": "Различия",
-  "Tasks": "Задачи",
-  "Review": "Обзор",
-  "Commit": "Коммит",
+  "Permission mode": "Режим разрешений",  "Terminal": "Терминал",
+  "Files": "Файлы",  "Tasks": "Задачи",  "Commit": "Коммит",
   "Branch": "Ветка",
   "Pull Request": "Pull Request",
   "Working directory": "Рабочая директория",
@@ -1381,11 +1349,7 @@
   "Clean up worktree": "Очистить рабочее дерево",
   "Exit worktree": "Выйти из рабочего дерева",
   "Run command": "Выполнить команду",
-  "Compact context": "Сжать контекст",
-  "Context": "Контекст",
-  "Tokens": "Токены",
-  "Usage": "Использование",
-  "Actual Size": "Фактический размер",
+  "Compact context": "Сжать контекст",  "Tokens": "Токены",  "Actual Size": "Фактический размер",
   "Copy": "Копировать",
   "Next Task": "Следующая задача",
   "Connect maker devices to Claude": "Подключение самодельных устройств к Claude",
@@ -1433,9 +1397,7 @@
   "Extension installation failed": "Ошибка установки расширения",
   "Usage credits · {used}": "Кредиты использования · {used}",
   "Couldn’t check this Mac for organization settings": "Не удалось проверить настройки организации на этом Mac",
-  "Couldn't check this Mac for organization settings": "Не удалось проверить настройки организации на этом Mac",
-  "Debug": "Отладка",
-  "This version of Cowork doesn't support disk cleanup yet. Restart the app and try again.": "Эта версия Cowork пока не поддерживает очистку диска. Перезапустите приложение и повторите попытку.",
+  "Couldn't check this Mac for organization settings": "Не удалось проверить настройки организации на этом Mac",  "This version of Cowork doesn't support disk cleanup yet. Restart the app and try again.": "Эта версия Cowork пока не поддерживает очистку диска. Перезапустите приложение и повторите попытку.",
   "This feature requires macOS 13.0 or higher": "Для этой функции требуется macOS 13.0 или выше",
   "Hide Others": "Скрыть остальные",
   "Reinstall workspace": "Переустановить рабочее пространство?",
@@ -1844,9 +1806,7 @@
   "{count, plural, one {Couldn''t attach the file from Quick Entry, so nothing was sent. Check that it''s still in place and is a file under {maxFileMb} MB.} other {Couldn''t attach the # files from Quick Entry, so nothing was sent. Check that they''re still in place and that each is a file under {maxFileMb} MB.}}": "{count, plural, one {Не удалось прикрепить # файл из окна «Быстрый ввод», поэтому ничего не отправлено. Проверьте, что файл по-прежнему на месте и является файлом размером меньше {maxFileMb} МБ.} few {Не удалось прикрепить # файла из окна «Быстрый ввод», поэтому ничего не отправлено. Проверьте, что они по-прежнему на месте и каждый из них является файлом размером меньше {maxFileMb} МБ.} many {Не удалось прикрепить # файлов из окна «Быстрый ввод», поэтому ничего не отправлено. Проверьте, что они по-прежнему на месте и каждый из них является файлом размером меньше {maxFileMb} МБ.} other {Не удалось прикрепить # файла из окна «Быстрый ввод», поэтому ничего не отправлено. Проверьте, что они по-прежнему на месте и каждый из них является файлом размером меньше {maxFileMb} МБ.}}",
   "New Side Chat": "Создать боковой чат",
   "Cowork requires macOS 14.0 (Sonoma) or later. Update your operating system to use this feature.": "Для Cowork требуется macOS 14.0 (Sonoma) или новее. Обновите операционную систему, чтобы использовать эту функцию.",
-  "Show logs": "Показать логи",
-  "Usage": "Использование",
-  "All importable Claude Code sessions on this computer, whether started in the Code tab or the terminal, are already in your session list, were previously deleted, or are in folders you haven't trusted in Claude yet.": "Все сессии Claude Code на этом компьютере, доступные для импорта (запущенные как во вкладке Code, так и в терминале), уже есть в списке сессий, были удалены ранее или находятся в папках, которые вы еще не отметили в Claude как доверенные.",
+  "Show logs": "Показать логи",  "All importable Claude Code sessions on this computer, whether started in the Code tab or the terminal, are already in your session list, were previously deleted, or are in folders you haven't trusted in Claude yet.": "Все сессии Claude Code на этом компьютере, доступные для импорта (запущенные как во вкладке Code, так и в терминале), уже есть в списке сессий, были удалены ранее или находятся в папках, которые вы еще не отметили в Claude как доверенные.",
   "Your administrator has restricted which folders can be used here. {skipped, plural, one {# folder was} other {# folders were}} skipped.": "Администратор ограничил набор папок, которые можно здесь использовать. {skipped, plural, one {Пропущена # папка.} few {Пропущено # папки.} many {Пропущено # папок.} other {Пропущено # папки.}}",
   "Load Local Claude.ai": "Загрузить локальную сборку Claude.ai",
   "Tap to copy as an image.": "Нажмите, чтобы скопировать как изображение.",
@@ -1905,9 +1865,7 @@
   "Reference implementation": "Эталонная реализация",
   "Close Split View": "Закрыть разделенный вид",
   "Couldn't open that session. Sign in to the desktop app and try again.": "Не удалось открыть эту сессию. Войдите в приложение для компьютера и попробуйте еще раз.",
-  "Couldn't move to Applications": "Не удалось переместить в папку «Программы»",
-  "Help": "Справка",
-  "Claude runs in the background even when you close the window. Click the Claude icon in the system tray to reopen the app, or right-click to quit.": "Claude продолжает работать в фоновом режиме, даже если вы закроете окно. Нажмите значок Claude в системном трее, чтобы снова открыть приложение, или щелкните по нему правой кнопкой мыши, чтобы выйти.",
+  "Couldn't move to Applications": "Не удалось переместить в папку «Программы»",  "Claude runs in the background even when you close the window. Click the Claude icon in the system tray to reopen the app, or right-click to quit.": "Claude продолжает работать в фоновом режиме, даже если вы закроете окно. Нажмите значок Claude в системном трее, чтобы снова открыть приложение, или щелкните по нему правой кнопкой мыши, чтобы выйти.",
   "Claude crashed repeatedly. Try restarting the app. If it keeps crashing, reinstall Claude from claude.ai/download or choose Help → Troubleshooting → Disable Hardware Acceleration.": "В работе Claude несколько раз произошел сбой. Попробуйте перезапустить приложение. Если сбои продолжатся, переустановите Claude с сайта claude.ai/download или выберите «Справка» → «Устранение неполадок» → «Отключить аппаратное ускорение».",
   "Usage credits · {used} of {limit}": "Кредиты использования · {used} из {limit}",
   "To show your cursor, press {esc}": "Чтобы показать курсор, нажмите {esc}",
@@ -2076,9 +2034,7 @@
   "Continue": "Продолжить",
   "Complete Setup": "Завершить настройку",
   "Reset Onboarding": "Сбросить настройку",
-  "Account": "Аккаунт",
-  "Permissions": "Разрешения",
-  "General": "Основные",
+  "Account": "Аккаунт",  "General": "Основные",
   "Appearance": "Внешний вид",
   "Tab": "Таб",
   "Editor": "Редактор",
@@ -2294,9 +2250,7 @@
   "Terminals": "Терминалы",
   "Console": "Консоль",
   "Output": "Вывод",
-  "Logs": "Журнал логов",
-  "Diff": "Изменения (Diff)",
-  "Overview": "Обзор",
+  "Logs": "Журнал логов",  "Overview": "Обзор",
   "Timeline": "Хронология",
   "Stop Subagent": "Остановить субагента",
   "Stop All Subagents": "Остановить всех субагентов",
@@ -2327,12 +2281,8 @@
   "Save changes": "Сохранить изменения",
   "Apply": "Применить",
   "Proceed": "Продолжить",
-  "Proceed Anyway": "Все равно продолжить",
-  "Run": "Запустить",
-  "Rerun": "Перезапустить",
-  "Pause": "Пауза",
-  "Resume": "Возобновить",
-  "Retry": "Повторить",
+  "Proceed Anyway": "Все равно продолжить",  "Rerun": "Перезапустить",
+  "Pause": "Пауза",  "Retry": "Повторить",
   "Try Again": "Попробовать снова",
   "Try again": "Попробовать снова",
   "Copied!": "Скопировано!",
@@ -2511,9 +2461,7 @@
   "Chat Settings": "Настройки чата",
   "Default": "По умолчанию",
   "Narrow": "Узкая",
-  "Wide": "Широкая",
-  "Theme": "Тема оформления",
-  "Light Theme": "Светлая тема",
+  "Wide": "Широкая",  "Light Theme": "Светлая тема",
   "Dark Theme": "Тёмная тема",
   "Preset": "Предустановка",
   "Default Light": "Стандартная светлая",
@@ -2540,9 +2488,7 @@
   "Customization token budget exceeded. Large customizations will be truncated.": "Лимит токенов на настройки превышен. Крупные элементы будут усечены.",
   "There are no customizations enabled.": "Настройки не включены.",
   "Loading token usage...": "Загрузка расхода токенов...",
-  "Rules": "Правила",
-  "Skills": "Навыки",
-  "Mcp Tools": "Инструменты MCP",
+  "Rules": "Правила",  "Mcp Tools": "Инструменты MCP",
   "System Prompt": "Системный промпт",
   "tokens)": "токенов)",
   "tokens": "токенов",
@@ -2550,9 +2496,7 @@
   "Hide breakdown": "Скрыть детали",
   "Default Customizations": "Настройки по умолчанию",
   "Personal Customizations": "Персональные настройки",
-  "When enabled, the agent will include default customizations, including default skills.": "При включении агент будет использовать стандартные настройки и навыки.",
-  "Plugins": "Плагины",
-  "Build With Google Plugins": "Плагины Build With Google",
+  "When enabled, the agent will include default customizations, including default skills.": "При включении агент будет использовать стандартные настройки и навыки.",  "Build With Google Plugins": "Плагины Build With Google",
   "Browse and enable plugins from the Build With Google catalog.": "Просмотр и включение плагинов из каталога Build With Google.",
   "Customize": "Настроить",
   "Hooks": "Хуки",
@@ -2678,9 +2622,7 @@
   "Send Now": "Отправить сейчас",
   "More Actions": "Другие действия",
   "More actions": "Другие действия",
-  "Command Center": "Командный центр",
-  "Rename": "Переименовать",
-  "Open in Notebook View": "Открыть в виде блокнота",
+  "Command Center": "Командный центр",  "Open in Notebook View": "Открыть в виде блокнота",
   "Enable Telemetry": "Телеметрия",
   "Marketing Emails": "Рассылка новостей",
   "Sign Out": "Выйти",
@@ -2727,9 +2669,7 @@
   "Rename chat": "Переименовать чат",
   "Share chat": "Поделиться чатом",
   "Share": "Поделиться",
-  "Export chat": "Экспортировать чат",
-  "Export": "Экспорт",
-  "Search": "Поиск",
+  "Export chat": "Экспортировать чат",  "Search": "Поиск",
   "Search chats": "Поиск чатов",
   "Search chats...": "Поиск по чатам...",
   "Search conversations": "Поиск диалогов",
@@ -2753,9 +2693,7 @@
   "Ask Claude...": "Спросить Claude...",
   "Write a message...": "Напишите сообщение...",
   "Add a follow-up...": "Задайте уточняющий вопрос...",
-  "Describe what you want to build...": "Опишите, что вы хотите создать...",
-  "Model": "Модель",
-  "Select a model": "Выберите модель",
+  "Describe what you want to build...": "Опишите, что вы хотите создать...",  "Select a model": "Выберите модель",
   "Choose model": "Выбор модели",
   "Claude 3.7 Sonnet": "Claude 3.7 Sonnet",
   "Claude 3.5 Sonnet": "Claude 3.5 Sonnet",
@@ -2773,9 +2711,7 @@
   "Thinking budget": "Бюджет на размышления",
   "Reasoning": "Рассуждения",
   "Fast mode": "Быстрый режим",
-  "Fast": "Быстро",
-  "Effort": "Уровень усилий",
-  "Low effort": "Низкий",
+  "Fast": "Быстро",  "Low effort": "Низкий",
   "Medium effort": "Средний",
   "High effort": "Высокий",
   "Max effort": "Максимальный",
@@ -2874,9 +2810,7 @@
   "Allow notifications": "Разрешить уведомления",
   "Sound": "Звук",
   "Notification sounds": "Звуковые уведомления",
-  "Desktop notifications": "Уведомления на рабочем столе",
-  "Billing": "Оплата и подписка",
-  "Billing & Plans": "Тарифы и оплата",
+  "Desktop notifications": "Уведомления на рабочем столе",  "Billing & Plans": "Тарифы и оплата",
   "Plans": "Тарифы",
   "Current plan": "Текущий тариф",
   "Free": "Free",
@@ -2900,14 +2834,10 @@
   "Refreshes in": "Обновление через",
   "Developer settings": "Настройки разработчика",
   "Claude Code": "Claude Code",
-  "Tools": "Инструменты",
-  "MCP": "MCP",
-  "Add MCP server": "Добавить MCP-сервер",
+  "Tools": "Инструменты",  "Add MCP server": "Добавить MCP-сервер",
   "Configured servers": "Настроенные серверы",
   "No MCP servers configured": "MCP-серверы не настроены",
-  "Open Terminal": "Открыть терминал",
-  "Tasks": "Задачи",
-  "Trusted folders": "Доверенные папки",
+  "Open Terminal": "Открыть терминал",  "Trusted folders": "Доверенные папки",
   "Permission mode": "Режим разрешений",
   "Auto": "Автоматически",
   "Accept edits": "Принимать правки",
@@ -2980,9 +2910,7 @@
   "Last month": "В прошлом месяце",
   "Title": "Название",
   "Date": "Дата",
-  "Size": "Размер",
-  "Status": "Статус",
-  "Type": "Тип",
+  "Size": "Размер",  "Type": "Тип",
   "Folder": "Папка",
   "Path": "Путь",
   "Created": "Создано",
@@ -3549,9 +3477,7 @@
   "tools": "инструменты",
   "connector": "коннектор",
   "Connector": "Коннектор",
-  "connectors": "коннекторы",
-  "Plugin": "Плагин",
-  "skill": "навык",
+  "connectors": "коннекторы",  "skill": "навык",
   "Skill": "Навык",
   "task": "задача",
   "session": "сессия",
@@ -9280,9 +9206,7 @@
   "Attach files": "Прикрепить файлы",
   "Back": "Назад",
   "Bad response": "Плохой ответ",
-  "Basic": "Базовые",
-  "Billing": "Оплата и подписка",
-  "Block": "Заблокировать",
+  "Basic": "Базовые",  "Block": "Заблокировать",
   "Blocked": "Заблокировано",
   "Browser Use": "Использование браузера",
   "Busy": "Занято",
@@ -9394,9 +9318,7 @@
   "Enterprise plan": "Корпоративный тариф",
   "Error": "Ошибка",
   "Error connecting": "Ошибка подключения",
-  "Explanatory": "Подробный",
-  "Export": "Экспорт",
-  "Export chat": "Экспортировать чат",
+  "Explanatory": "Подробный",  "Export chat": "Экспортировать чат",
   "Export data": "Экспорт данных",
   "Export traces": "Экспортировать traces",
   "Export URL": "Экспортировать URL",
@@ -9422,9 +9344,7 @@
   "Get support": "Получить поддержку",
   "GitHub repo": "Репозиторий GitHub",
   "Go back to Claude to finish setting up the iOS Simulator.": "Вернитесь в Claude для завершения настройки iOS Simulator.",
-  "Good response": "Хороший ответ",
-  "Help": "Справка",
-  "Help & support": "Помощь и поддержка",
+  "Good response": "Хороший ответ",  "Help & support": "Помощь и поддержка",
   "Helper script": "Вспомогательный скрипт",
   "Hide Browser": "Скрыть Browser",
   "Hide Changes": "Скрыть Changes",
@@ -9476,9 +9396,7 @@
   "Members": "Участники",
   "Message too long": "Сообщение слишком длинное",
   "Minimize": "Свернуть",
-  "Minimize window": "Свернуть окно",
-  "Model": "Модель",
-  "Models": "Модели",
+  "Minimize window": "Свернуть окно",  "Models": "Модели",
   "More": "Еще",
   "Move to project": "Переместить в проект",
   "New artifact": "Новый артефакт",
@@ -9558,9 +9476,7 @@
   "Reload": "Перезагрузить",
   "Reload application": "Перезагрузить приложение",
   "Remove and retry": "Удалить и повторить",
-  "Remove server": "Удалить сервер",
-  "Rename": "Переименовать",
-  "Rename chat": "Переименовать чат",
+  "Remove server": "Удалить сервер",  "Rename chat": "Переименовать чат",
   "Reply to Claude": "Ответить Клоду",
   "Reset": "Сбросить",
   "Reset App Data…": "Сбросить App Data…",
@@ -9576,9 +9492,7 @@
   "Restart WSL": "Перезапустить WSL",
   "Retry": "Повторить попытку",
   "Retry connection": "Повторить подключение",
-  "Reveal in Finder": "Показать в Finder",
-  "Run": "Запустить",
-  "Run code": "Выполнить код",
+  "Reveal in Finder": "Показать в Finder",  "Run code": "Выполнить код",
   "Save": "Сохранить",
   "Save changes": "Сохранить изменения",
   "Saved": "Сохранено",
@@ -9627,9 +9541,7 @@
   "Star": "В избранное",
   "Starred": "Избранное",
   "Start Cowork VM": "Запустить виртуальную машину Cowork",
-  "Start new chat": "Новый чат",
-  "Status": "Статус",
-  "Stop": "Остановить",
+  "Start new chat": "Новый чат",  "Stop": "Остановить",
   "Stop Cowork VM": "Остановить виртуальную машину Cowork",
   "Stop generating": "Остановить генерацию",
   "Style": "Стиль",
@@ -9641,9 +9553,7 @@
   "System": "Системная",
   "Team plan": "Тариф Team",
   "Terms of service": "Условия использования",
-  "The code has been copied to your clipboard.": "Код скопирован в буфер обмена.",
-  "Theme": "Тема",
-  "Thinking...": "Размышляю...",
+  "The code has been copied to your clipboard.": "Код скопирован в буфер обмена.",  "Thinking...": "Размышляю...",
   "This action cannot be undone.": "Это действие нельзя отменить.",
   "Thought process": "Ход рассуждений",
   "Toggle Developer Tools": "Переключить инструменты разработчика",
@@ -9669,9 +9579,7 @@
   "Upgrade plan": "Сменить тариф",
   "Upgrade to Pro": "Перейти на Pro",
   "Upload": "Загрузить",
-  "Upload files": "Загрузить файлы",
-  "Usage": "Использование",
-  "Version": "Версия",
+  "Upload files": "Загрузить файлы",  "Version": "Версия",
   "Version {version}": "Версия {version}",
   "Versions": "Версии",
   "View": "Вид",
@@ -9980,6 +9888,169 @@
 
   const RULES = [
     {
+      regex: /^Clean up the changed code without changing behavior.*$/i,
+      replace: function () {
+        return "Очистить и упростить измененный код без изменения его поведения";
+      }
+    },
+    // === Robust Rules for Skills & Slash Commands Descriptions ===
+    {
+      regex: /^(__remote-workflow\s+)?Run the workflow script delivered in this session environment.*$/i,
+      replace: function () {
+        return "Запуск скрипта воркфлоу, переданного в окружении этой сессии (только для сессий, запущенных с сервера)";
+      }
+    },
+    {
+      regex: /^(doctor\s+)?Health-check the user['’]s Claude Code setup and fix issues.*$/i,
+      replace: function () {
+        return "Проверить состояние установки Claude Code и устранить проблемы: диагностика установки, дубликаты, PATH, файлы настроек, неиспользуемые навыки, MCP-серверы и плагины, удаление дубликатов CLAUDE.md.";
+      }
+    },
+    {
+      regex: /^(\(anthropic-skills\)\s*)?(anthropic-skills\s+)?Use this skill whenever the user wants to (create, read, edit, or manipulate|do anything with)?.*Word.*$/i,
+      replace: function (m) {
+        var p = m[1] || "";
+        return p + "Используйте этот навык каждый раз, когда пользователю нужно создать, прочитать, отредактировать или обработать документы Word (.docx) или шаблоны Word (.dotx).";
+      }
+    },
+    {
+      regex: /^(\(anthropic-skills\)\s*)?(anthropic-skills\s+)?Use this skill any time a \.pptx.*$/i,
+      replace: function (m) {
+        var p = m[1] || "";
+        return p + "Используйте этот навык в любых случаях, когда задействован файл .pptx или .potx — в качестве входных или выходных данных (создание, чтение, редактирование слайдов и презентаций PowerPoint).";
+      }
+    },
+    {
+      regex: /^(\(anthropic-skills\)\s*)?(anthropic-skills\s+)?Use this skill any time a spreadsheet file is the primary input or output.*$/i,
+      replace: function (m) {
+        var p = m[1] || "";
+        return p + "Используйте этот навык всякий раз, когда файл электронной таблицы (.xlsx, .xlsm, .csv) является основным источником данных или целевым результатом (формулы, форматирование, диаграммы, очистка данных).";
+      }
+    },
+    {
+      regex: /^(\(anthropic-skills\)\s*)?(anthropic-skills\s+)?Use this skill whenever the user wants to do anything with PDF files.*$/i,
+      replace: function (m) {
+        var p = m[1] || "";
+        return p + "Используйте этот навык всякий раз, когда пользователю требуется выполнить любые действия с PDF-файлами (чтение, извлечение текста/таблиц, объединение, разделение, OCR, формы).";
+      }
+    },
+    {
+      regex: /^(\(anthropic-skills\)\s*)?(anthropic-skills\s+)?Create or update a scheduled task that runs automatically.*$/i,
+      replace: function (m) {
+        var p = m[1] || "";
+        return p + "Создание или обновление запланированной задачи, запускаемой автоматически («каждый день», «каждое утро», «напомни через час»).";
+      }
+    },
+    {
+      regex: /^Reference for the Claude API \/ Anthropic SDK.*$/i,
+      replace: function () {
+        return "Справочник по Claude API / Anthropic SDK — идентификаторы моделей, цены, параметры, стриминг, вызовы инструментов, MCP, агенты, кэширование и подсчет токенов.";
+      }
+    },
+    {
+      regex: /^Use this skill to configure the Claude Code harness via settings\.json.*$/i,
+      replace: function () {
+        return "Используйте этот навык для настройки параметров и хуков Claude Code через settings.json (разрешения, переменные среды, отладка хуков).";
+      }
+    },
+    {
+      regex: /^Verify that a code change actually does what it['’]s supposed to.*$/i,
+      replace: function () {
+        return "Проверить работоспособность изменений сквозным тестированием реального поведения перед коммитом нетривиальных правок.";
+      }
+    },
+    {
+      regex: /^Reference for writing a Workflow tool script.*$/i,
+      replace: function () {
+        return "Справочник по написанию скриптов для инструмента Workflow (API скриптов, возобновление, паттерны качества и примеры).";
+      }
+    },
+    {
+      regex: /^Execute a server-launched workflow handoff.*$/i,
+      replace: function () {
+        return "Выполнить передачу управления воркфлоу, запущенному с сервера.";
+      }
+    },
+    {
+      regex: /^Help teammates ramp on Claude Code with a guide from your usage.*$/i,
+      replace: function () {
+        return "Помочь коллегам освоить Claude Code на основе руководства по вашему опыту использования.";
+      }
+    },
+    {
+      regex: /^Author or improve the run-<unit> skill.*$/i,
+      replace: function () {
+        return "Создать или улучшить навык run-<unit> — навык проекта, указывающий агентам, как собирать, запускать и управлять приложением.";
+      }
+    },
+    {
+      regex: /^Deep research harness.*$/i,
+      replace: function () {
+        return "Инструмент глубокого исследования — параллельный поиск в сети, проверка источников и синтез отчета со ссылками.";
+      }
+    },
+    {
+      regex: /^Scan your transcripts for common read-only Bash and MCP tool calls.*$/i,
+      replace: function () {
+        return "Сканировать историю сессий для выявления частых read-only вызовов Bash и MCP и добавления их в разрешенный список .claude/settings.json.";
+      }
+    },
+    {
+      regex: /^Research and plan a large-scale change, then execute it in parallel.*$/i,
+      replace: function () {
+        return "Исследовать и спланировать масштабное изменение, затем выполнить его параллельно силами 5–30 изолированных агентов worktree с открытием PR.";
+      }
+    },
+    {
+      regex: /^Review the changed code for reuse, simplification, efficiency.*$/i,
+      replace: function () {
+        return "Ревью измененного кода на предмет повторного использования, упрощения и эффективности с последующим применением правок (без поиска багов).";
+      }
+    },
+    {
+      regex: /^Use this skill whenever you are about to create ANY chart, graph, plot, dashboard.*$/i,
+      replace: function () {
+        return "Используйте этот навык перед созданием ЛЮБОЙ диаграммы, графика, дашборда или визуализации данных (цветовая палитра, компоновка, правила взаимодействия).";
+      }
+    },
+    {
+      regex: /^Guidance for distinctive, intentional visual design when building new UI.*$/i,
+      replace: function () {
+        return "Руководство по выразительному визуальному дизайну при создании нового или изменении существующего UI (эстетическое направление, типографика).";
+      }
+    },
+    {
+      regex: /^Use this skill when you need to read, inspect, or extract content from PDF files.*$/i,
+      replace: function () {
+        return "Используйте этот навык, когда нужно прочитать, исследовать или извлечь контент из PDF-файлов с диска.";
+      }
+    },
+    {
+      regex: /^Reflective pass over your memory files.*$/i,
+      replace: function () {
+        return "Анализ файлов памяти: объединение дубликатов, исправление устаревших фактов, очистка индекса.";
+      }
+    },
+    {
+      regex: /^Explain where this session['’]s tokens went.*$/i,
+      replace: function () {
+        return "Объяснить, куда ушли токены этой сессии, с простой наглядной диаграммой на понятном языке.";
+      }
+    },
+    {
+      regex: /^Guided setup \u2014 install a matching plugin, try a skill, connect tools.*$/i,
+      replace: function () {
+        return "Пошаговая настройка — установка подходящего плагина, тестирование навыка, подключение инструментов.";
+      }
+    },
+    {
+      regex: /^Guided setup — install a matching plugin, try a skill, connect tools.*$/i,
+      replace: function () {
+        return "Пошаговая настройка — установка подходящего плагина, тестирование навыка, подключение инструментов.";
+      }
+    },
+
+    {
       regex: /^Finisheds+(d+)$/i,
       replace: function (m) { return "Завершенные " + m[1]; }
     },
@@ -10195,10 +10266,30 @@
     return false;
   }
 
+  
+  const COMMAND_NAMES_SET = new Set([
+    "compact", "config", "context", "dataviz", "debug", "deep-research", "doctor",
+    "init", "review", "simplify", "verify", "run", "cost", "billing", "model",
+    "plugin", "plugins", "effort", "recap", "theme", "status", "tasks", "usage", "help",
+    "login", "logout", "permissions", "skills", "rename", "schedule", "autocompact",
+    "batch", "claude-api", "color", "fewer-permission-prompts", "focus", "goal",
+    "heapdump", "insights", "list-agents", "loop", "plugin-authoring", "reload-plugins",
+    "reload-skills", "run-skill-generator", "team-onboarding", "update-config",
+    "workflow-authoring", "workflow-launch-exec", "docx", "pdf", "pptx", "xlsx",
+    "btw", "rewind", "fork", "subtask", "mcp", "mcpSession", "outputStyle", "output-style",
+    "export", "addDir", "add-dir", "cd", "diff", "resetLimits", "reset-limits",
+    "createPr", "create-pr", "logs", "resume", "advisor", "fast", "usageCredits",
+    "explain-usage", "setup-claude", "consolidate-memory", "frontend-design", "pdf-reading",
+    "security-review", "pr-comments", "release-notes", "__remote-workflow", "anthropic-skills"
+  ]);
+
   function translateString(text) {
     if (typeof text !== 'string') return null;
     const trimmed = text.trim();
     if (!trimmed) return null;
+    if (COMMAND_NAMES_SET.has(trimmed.toLowerCase())) {
+      return null;
+    }
 
     const startSpace = text.match(/^\s*/)[0];
     const endSpace = text.match(/\s*$/)[0];
