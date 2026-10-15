@@ -66,4 +66,9 @@ all_missing_in_assets.json
 commands_and_actions.json
 short_labels.json
 generate.js
+all_53_screenshots_trans.json
+batch_trans_*.json
+qa_verification_report.json
+verify_qa.js
+переведи/
 
