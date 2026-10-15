@@ -1,83 +1,90 @@
-# 🇷🇺 Claude Desktop Русификатор (macOS / Windows / Linux)
+# 🇷🇺 Полный Русификатор Claude Desktop (Windows / macOS / Linux)
 
 <p align="center">
   <img src="https://claude.ai/images/claude_ogimage.png" width="400" alt="Claude Desktop">
 </p>
 
 <p align="center">
-  <strong>Комплексный и качественный русификатор для официального десктопного приложения Claude.</strong>
+  <strong>100% полный, качественный и бесшовный перевод официального десктопного приложения Claude Desktop на русский язык.</strong>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Platform-macOS%20%7C%20Windows%20%7C%20Linux-blue?style=flat-square" alt="Platform">
+  <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-blue?style=flat-square" alt="Platform">
   <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License">
   <img src="https://img.shields.io/badge/Claude%20Desktop-v2.x-orange?style=flat-square" alt="Version">
+  <img src="https://img.shields.io/badge/Coverage-100%25-brightgreen?style=flat-square" alt="Coverage">
 </p>
 
 ---
 
-## ✨ Особенности
+## ✨ Возможности и архитектура
 
-* **Нативная трехуровневая архитектура**:
-  1. **Нативные JSON-каталоги**: перевод интегрирован в системные файлы приложения (`en-US.json` и `dynamic/en-US.json`), загружаемые движком FormatJS / React-Intl на старте.
-  2. **Синхронный перехватчик `fetch`**: гарантирует мгновенную подмену сообщений в оперативной памяти до рендера компонентов (никакого мигания английского текста).
-  3. **Реактивный DOM-наблюдатель (`i18n-ru.js`)**: переводит динамические всплывающие меню, тултипы, контекстные списки и плейсхолдеры ввода с нормализацией кавычек и спецсимволов.
-* **Переведено всё приложение**:
-  * **Все разделы Настроек**: Основные, Профиль, Внешний вид, Конфиденциальность, Расход токенов (Usage), Claude Code, Cowork, Импорт и экспорт, Этот компьютер (Системные), Разработчик, Навыки, Коннекторы, Плагины.
-  * **Инференс и сторонние шлюзы**: полный перевод экрана конфигурации стороннего инференса (`127.0.0.1:10100`, шлюзы, учетные данные, API-ключи).
-  * **Чат, Модели и Размышления**: 100% моделей (*Sonnet, Opus, Haiku*), режимов мышления (*Auto thinking, Extended, Adaptive, Fast mode*), параметров усилий (*Low, Medium, High, Max*) и инструментов (*Web search, Analysis tool*).
-  * **Запланированные задачи (Scheduled Tasks) и Рутины**: создание задач, расписания, шаблоны карточек, переключатели сна.
-  * **Артефакты и Проекты**: создание проектов, модальные окна, версии артефактов, код и предпросмотр.
-  * **Боковая панель и фильтры**: группировка, сортировка, контекстные меню, меню пользователя.
-* **Безопасность кода**: текст сообщений пользователя и сгенерированный код нейросети не изменяются.
-* **Легкое удаление**: автоматическое создание резервных копий и восстановление оригиналов в 1 клик.
+В отличие от стандартных частичных русификаторов, данный проект реализует **полный четырехконтурный перевод**:
+
+1. **Нативные системные меню Electron и системный трей (`resources/en-US.json`)**:
+   - 100% покрытие (все 807 нативных ключей).
+   - Меню окна (*Файл, Правка, Вид, Окно, Справка*), контекстное меню трея, системные диалоги подтверждения, запросы прав доступа, SSH-сессии и сочетания клавиш переведены с соблюдением ICU-плюрализации.
+2. **Основной веб-каталог FormatJS / React-Intl (`dist/en-US.json`)**:
+   - Более **5000 переведенных ключей**: настройки, профиль, диалоги, боковая панель, вкладка Claude Code, управление ворктри (worktree), ветками, коммитами и PR в GitHub.
+3. **Динамический каталог моделей и параметров инференса (`dist/dynamic/en-US.json`)**:
+   - 100% моделей (*Sonnet, Opus, Haiku*), описания (*«Максимальные возможности для масштабных задач»*), режимы мышления (*Auto thinking, Extended, Budget*), уровни рассуждения (*Low, Medium, High, Max*) и инструменты.
+4. **Реактивный перехватчик `fetch` и DOM-движок (`dist/i18n-ru.js`)**:
+   - Перехватывает вызовы `fetch` до рендера компонентов React (никакого мигания английского текста).
+   - Динамически переводит всплывающие подсказки, контекстные меню, рутины, создание навыков, каталоги плагинов и настройки стороннего инференса.
+   - **Защита ввода**: предотвращает искажение текста сообщений пользователя и блоков кода в терминале/редакторах.
 
 ---
 
-## 🚀 Установка
+## 🚀 Инструкция по установке
+
+### 🪟 Windows (10 / 11)
+
+#### Быстрая установка:
+1. Закройте приложение Claude Desktop (если открыто).
+2. Запустите **PowerShell** от имени обычного пользователя (или Администратора) и выполните:
+
+```powershell
+git clone https://github.com/santoxas-1/claude-russification.git
+cd claude-russification
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+3. После завершения на Рабочем столе появится ярлык **«Claude (Русский)»**. Запустите приложение с него.
+
+> **💡 Особенности для Windows**:
+> * **Безопасное завершение**: скрипт останавливает только GUI-окно Claude Desktop и **не прерывает** консольные процессы Claude Code CLI / Agent SDK.
+> * **Поддержка Microsoft Store (MSIX / WindowsApps)**: если Claude установлен через магазин Windows, скрипт автоматически создаст чистую рабочую копию в `%LOCALAPPDATA%\Programs\Claude`, локализует её и выведет ярлык на Рабочий стол, избегая конфликта с защитой цифровой подписи Windows (`0x80073CFC`).
+> * **Очистка кэша**: автоматически очищается старый кэш Chromium для мгновенного вступления изменений в силу.
+
+---
 
 ### 🍎 macOS
 
-Откройте Терминал и выполните:
+1. Откройте **Терминал** и выполните:
 
 ```bash
-git clone https://github.com/vlad/claude-russification.git
+git clone https://github.com/santoxas-1/claude-russification.git
 cd claude-russification
 chmod +x install.sh
 sudo ./install.sh
 ```
 
-После завершения запустите Claude:
+2. Запустите Claude:
 ```bash
 open /Applications/Claude.app
 ```
 
-> **Примечание для macOS**: Скрипт автоматически снимает карантинные флаги Gatekeeper (`xattr -cr`), очищает браузерный кэш Chromium и переподписывает приложение ad-hoc сертификатом (`codesign`).
-
----
-
-### 🪟 Windows
-
-1. Откройте **PowerShell** от имени пользователя (или Администратора).
-2. Выполните:
-
-```powershell
-git clone https://github.com/vlad/claude-russification.git
-cd claude-russification
-powershell -ExecutionPolicy Bypass -File .\install.ps1
-```
-
-> **Особенности работы на Windows**:
-> * **Безопасное завершение процессов**: скрипт завершает исключительно GUI-клиент Claude Desktop и не прерывает фоновые процессы Claude Code CLI / субпроцессы агентов.
-> * **Поддержка Windows 10/11 и Microsoft Store (WindowsApps / MSIX)**: если Claude установлен через Windows Store / MSIX, прямая модификация файлов невозможна из-за защиты цифровой подписью Windows. Скрипт автоматически распознает это и создает независимую рабочую standalone-копию в `%LOCALAPPDATA%\Programs\Claude`, после чего русифицирует её и создает ярлык **«Claude (Русский)»** на Рабочем столе и в меню «Пуск».
-> * **Очистка кэша**: автоматически удаляет старый кэш Chromium / Electron из AppData и LocalAppData, исключая артефакты старого интерфейса.
+> **💡 Особенности для macOS**:
+> Скрипт автоматически снимает карантинные флаги Gatekeeper (`xattr -cr`), очищает кэш Chromium и переподписывает приложение ad-hoc сертификатом (`codesign`).
 
 ---
 
 ### 🐧 Linux
 
+1. Откройте терминал и выполните:
+
 ```bash
-git clone https://github.com/vlad/claude-russification.git
+git clone https://github.com/santoxas-1/claude-russification.git
 cd claude-russification
 chmod +x install.sh
 sudo ./install.sh
@@ -85,56 +92,72 @@ sudo ./install.sh
 
 ---
 
-## 🔄 После обновления Claude Desktop
+## 🔄 Инструкция по обновлению
 
-Claude Desktop обновляется автоматически в фоновом режиме, перезаписывая папку ресурсов.
-Если интерфейс после автообновления снова стал на английском, просто запустите команду повторно:
+Claude Desktop периодически обновляется в фоновом режиме, скачивая свежие файлы ресурсов. Если после обновления Claude часть интерфейса снова стала на английском языке:
 
-* **macOS / Linux**:
-  ```bash
-  cd claude-russification && sudo ./install.sh
-  ```
-* **Windows**:
-  ```powershell
-  cd claude-russification; powershell -ExecutionPolicy Bypass -File .\install.ps1
-  ```
+### На Windows:
+Откройте PowerShell в папке с репозиторием и выполните:
+```powershell
+cd claude-russification
+git pull
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+### На macOS / Linux:
+Откройте Терминал в папке с репозиторием и выполните:
+```bash
+cd claude-russification
+git pull
+sudo ./install.sh
+```
+
+Скрипт автоматически подтянет новые переводы, применит патчи и очистит кэш.
 
 ---
 
-## 🗑️ Удаление (Возврат к заводскому оригиналу)
+## 🗑️ Инструкция по удалению (Возврат к оригиналу)
 
-Скрипт вернет оригинальные языковые каталоги и `index.html` из резервных копий `.original`:
+Если вы решите полностью удалить русификатор и вернуть заводскую английскую версию приложения:
 
-* **macOS / Linux**:
-  ```bash
-  sudo ./uninstall.sh
-  ```
-* **Windows**:
-  ```powershell
-  powershell -ExecutionPolicy Bypass -File .\uninstall.ps1
-  ```
+### На Windows:
+В PowerShell перейдите в папку проекта и запустите скрипт деинсталляции:
+```powershell
+cd claude-russification
+powershell -ExecutionPolicy Bypass -File .\uninstall.ps1
+```
+Скрипт:
+- Восстановит оригинальные файлы `en-US.json`, `index.html` и нативные меню из резервных копий `.original`.
+- Удалит созданный скрипт перехватчика `i18n-ru.js`.
+- Удалит созданные ярлыки «Claude (Русский)» с Рабочего стола и меню «Пуск».
+- Очистит кэш браузера.
+
+### На macOS / Linux:
+В Терминале запустите:
+```bash
+cd claude-russification
+sudo ./uninstall.sh
+```
 
 ---
 
 ## 🛠️ Сборка из исходников (Для разработчиков)
 
-Если вы хотите дополнить перевод или отредактировать словарь:
-
-1. Исходные словари находятся в папке `src/`:
-   * `dictionary_ru.py` — основные элементы интерфейса
-   * `settings_translations.py` — настройки и сессии
-   * `screenshot_targets_ru.py` — целевые фразы экранов
-   * `all_tabs_ru.py` — вкладки (Коннекторы, Навыки, Cowork и др.)
-   * `dynamic_ru.py` — параметры моделей и размышлений
-2. Для компиляции в папку `dist/` запустите:
+Если вы хотите расширить перевод или добавить собственные термины:
+1. Редактируйте словари в каталоге `src/`:
+   * `dictionary_ru.py` — общие термины и элементы интерфейса;
+   * `settings_translations.py` — параметры настроек и сессий;
+   * `dynamic_ru.py` — параметры моделей и режимов рассуждений;
+   * `all_tabs_ru.py` — вкладки и боковая панель.
+2. Скомпилируйте файлы каталога `dist/`:
    ```bash
    python3 src/build.py
    ```
-3. Примените обновленную сборку с помощью `install.sh` или `install.ps1`.
+3. Запустите скрипт установки `install.ps1` или `install.sh`.
 
 ---
 
 ## 📄 Лицензия
 
-Распространяется под лицензией [MIT](LICENSE).
-Проект создан сообществом и не аффилирован с Anthropic PBC.
+Проект распространяется под лицензией [MIT](LICENSE).  
+Создан сообществом для русскоязычных пользователей Claude. Не аффилирован с Anthropic PBC.

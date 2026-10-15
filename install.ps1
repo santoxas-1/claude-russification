@@ -11,7 +11,7 @@ $ErrorActionPreference = "Stop"
 
 Write-Host "=======================================================" -ForegroundColor Cyan
 Write-Host "   Русификатор Claude Desktop для Windows              " -ForegroundColor Cyan
-Write-Host "   https://github.com/vlad/claude-russification        " -ForegroundColor Cyan
+Write-Host "   https://github.com/santoxas-1/claude-russification   " -ForegroundColor Cyan
 Write-Host "=======================================================" -ForegroundColor Cyan
 Write-Host ""
 
