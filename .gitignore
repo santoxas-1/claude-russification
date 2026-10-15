@@ -60,4 +60,10 @@ dom_dictionary_addon.json
 native_completed_ru.json
 translations.json
 translations_chat_ui.json
+ca_*.json
+sl_*.json
+all_missing_in_assets.json
+commands_and_actions.json
+short_labels.json
+generate.js
 
