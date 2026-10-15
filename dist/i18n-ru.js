@@ -6,6 +6,19 @@
   'use strict';
 
   const DICT = {
+  // === Screenshots 48-55 Translations ===
+  "No matching settings": "Настройки не найдены",
+  "Chart": "График",
+  "Turn off": "Отключить",
+  "Search GitHub or paste a repository URL": "Поиск на GitHub или вставьте URL репозитория",
+  "A GitHub ": "На GitHub: ",
+  " or a Git repository URL.": " или URL Git-репозитория.",
+  " or a Git repository URL": " или URL Git-репозитория",
+  "A GitHub owner/repo or a Git repository URL": "owner/repo на GitHub или URL Git-репозитория",
+  "Validated syntax": "Синтаксис проверен",
+  "(удалено) Removed": "(удалено) Удалено",
+  "Removed": "Удалено",
+
   // === QA Auditor Verified Injections ===
   "(anthropic-skills) Create or update a scheduled task that runs automatically. Use when the user says things like \"every day\", \"each morning\", \"remind me in an hour\", \"run this at noon\", or wants to reschedule an existing task.": "(anthropic-skills) Создание или обновление запланированной задачи, запускаемой автоматически. Используйте при фразах пользователя вроде «каждый день», «каждое утро», «напомни через час», «запусти в полдень» или при желании перенести существующую задачу.",
   "Create or update a scheduled task that runs automatically. Use when the user says things like \"every day\", \"each morning\", \"remind me in an hour\", \"run this at noon\", or wants to reschedule an existing task.": "Создание или обновление запланированной задачи, запускаемой автоматически. Используйте при фразах пользователя вроде «каждый день», «каждое утро», «напомни через час», «запусти в полдень» или при желании перенести существующую задачу.",
@@ -9886,6 +9899,38 @@
   }
 
   const RULES = [
+    // === Screenshots 48-55 Dynamic Rules ===
+    {
+      regex: /^Context\s+([0-9.,]+[kKmM]?)\s*\/\s*([0-9.,]+[kKmM]?)\s*(\(\d+%\))?$/i,
+      replace: function (m) {
+        return "Контекст " + m[1] + " / " + m[2] + (m[3] ? " " + m[3] : "");
+      }
+    },
+    {
+      regex: /^Searched for (.*)$/i,
+      replace: function (m) { return "Поиск " + m[1]; }
+    },
+    {
+      regex: /^Inspected context (.*)$/i,
+      replace: function (m) { return "Проверка контекста " + m[1]; }
+    },
+    {
+      regex: /^Found exact target (.*)$/i,
+      replace: function (m) { return "Найдено точное совпадение " + m[1]; }
+    },
+    {
+      regex: /^Checked if (.*)$/i,
+      replace: function (m) { return "Проверено, " + m[1]; }
+    },
+    {
+      regex: /^Testing translation of (.*)$/i,
+      replace: function (m) { return "Тестирование перевода " + m[1]; }
+    },
+    {
+      regex: /^\(удалено\)\s*Removed$/i,
+      replace: function () { return "(удалено) Удалено"; }
+    },
+
     {
       regex: /^Clean up the changed code without changing behavior.*$/i,
       replace: function () {
