@@ -1,11 +1,11 @@
-# 🇷🇺 Полный Русификатор Claude Desktop (Windows / macOS / Linux)
+# Русификатор Claude Desktop (Windows / macOS / Linux)
 
 <p align="center">
   <img src="https://claude.ai/images/claude_ogimage.png" width="400" alt="Claude Desktop">
 </p>
 
 <p align="center">
-  <strong>100% полный, качественный и бесшовный перевод официального десктопного приложения Claude Desktop на русский язык.</strong>
+  <strong>Перевод официального десктопного приложения Claude Desktop на русский язык</strong>
 </p>
 
 <p align="center">
