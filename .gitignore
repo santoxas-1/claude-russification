@@ -16,6 +16,8 @@ Thumbs.db
 *.asar
 *.mjs
 *.bat
+!install.bat
+!uninstall.bat
 !enable-autoheal.bat
 !disable-autoheal.bat
 !status-autoheal.bat
