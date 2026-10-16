@@ -16,6 +16,9 @@ Thumbs.db
 *.asar
 *.mjs
 *.bat
+!enable-autoheal.bat
+!disable-autoheal.bat
+!status-autoheal.bat
 *.ps1.bak
 chunk_*.json
 chunk_part_*.json
@@ -71,4 +74,7 @@ batch_trans_*.json
 qa_verification_report.json
 verify_qa.js
 переведи/
+.claude/
+*.patch
+plugins/
 

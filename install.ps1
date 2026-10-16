@@ -346,7 +346,8 @@ $RussianRuleContent = @"
 
 $RussianRuleMarker
 ## Языковые инструкции (Language Preference)
-- Все внутренние рассуждения (Thinking / Chain of Thought), ход мыслей, промежуточный анализ и шаги планирования ВСЕГДА ведутся исключительно на русском языке.
+- Все внутренние рассуждения (Thinking / Chain of Thought), ход мыслей, промежуточный анализ и шаги планирования ВСЕГДА ведутся исключительно на русском языке от начала и до самого конца.
+- КАТЕГОРИЧЕСКИ ЗАПРЕЩЕНО переходить или соскальзывать на английский язык внутри блоков рассуждений (thinking), даже при обсуждении или анализе англоязычного кода, системных терминов, архитектуры, библиотек или инструментов.
 - Любой промежуточный текст между вызовами инструментов (intermediate progress text, краткие сводки действий, статус выполнения) ВСЕГДА пишется исключительно на русском языке.
 - Ответы и выводы пользователю формулируются на русском языке. Код, системные идентификаторы и имена команд остаются на английском.
 <!-- END-CLAUDE-RUSSIFICATION-THINKING-CONFIG -->
@@ -354,11 +355,13 @@ $RussianRuleMarker
 
 if (Test-Path $GlobalClaudeMd) {
     $ExistingContent = [System.IO.File]::ReadAllText($GlobalClaudeMd, [System.Text.Encoding]::UTF8)
-    if ($ExistingContent -notmatch "CLAUDE-RUSSIFICATION-THINKING-CONFIG") {
+    if ($ExistingContent -match "<!-- CLAUDE-RUSSIFICATION-THINKING-CONFIG -->[\s\S]*?<!-- END-CLAUDE-RUSSIFICATION-THINKING-CONFIG -->") {
+        Write-Host "📝 Обновление строгих инструкций русского мышления в ~/.claude/CLAUDE.md..." -ForegroundColor Yellow
+        $ExistingContent = $ExistingContent -replace "<!-- CLAUDE-RUSSIFICATION-THINKING-CONFIG -->[\s\S]*?<!-- END-CLAUDE-RUSSIFICATION-THINKING-CONFIG -->", $RussianRuleContent.Trim()
+        [System.IO.File]::WriteAllText($GlobalClaudeMd, $ExistingContent, [System.Text.Encoding]::UTF8)
+    } else {
         Write-Host "📝 Дополнение глобальных инструкций Claude Code (~/.claude/CLAUDE.md)..." -ForegroundColor Yellow
         [System.IO.File]::AppendAllText($GlobalClaudeMd, [Environment]::NewLine + $RussianRuleContent, [System.Text.Encoding]::UTF8)
-    } else {
-        Write-Host "ℹ️ Инструкции русского мышления уже присутствуют в ~/.claude/CLAUDE.md." -ForegroundColor Gray
     }
 } else {
     Write-Host "📝 Создание глобальных инструкций Claude Code (~/.claude/CLAUDE.md)..." -ForegroundColor Yellow
@@ -383,6 +386,21 @@ foreach ($baseCache in $CacheLocations) {
                 Remove-Item "$dir\*" -Recurse -Force -ErrorAction SilentlyContinue
             }
         }
+    }
+}
+
+# -------------------------------------------------------------
+# 10. Активация фоновой автозащиты от сброса при обновлениях (Auto-Heal)
+# -------------------------------------------------------------
+$AutoHealVbs = Join-Path $ScriptDir "auto-heal-silent.vbs"
+if (Test-Path $AutoHealVbs) {
+    Write-Host "🛡️ Активация фоновой автозащиты русификатора (Auto-Heal)..." -ForegroundColor Yellow
+    try {
+        & schtasks /create /tn "ClaudeDesktopAutoHeal" /tr "wscript.exe `"$AutoHealVbs`"" /sc onlogon /f /rl limited 2>$null | Out-Null
+        Start-Process "wscript.exe" -ArgumentList "`"$AutoHealVbs`"" -ErrorAction SilentlyContinue
+        Write-Host "✅ Фоновая автозащита успешно активирована (служба Auto-Heal активна)." -ForegroundColor Green
+    } catch {
+        Write-Host "⚠️ Не удалось активировать автозащиту в планировщике, используйте enable-autoheal.bat" -ForegroundColor Gray
     }
 }
 

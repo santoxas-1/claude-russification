@@ -226,5 +226,16 @@ foreach ($baseCache in $CacheLocations) {
     }
 }
 
+# -------------------------------------------------------------
+# 9. Отключение фоновой службы автозащиты (Auto-Heal)
+# -------------------------------------------------------------
+Write-Host "🛡️ Остановка и удаление фоновой автозащиты Auto-Heal..." -ForegroundColor Yellow
+try {
+    Get-CimInstance Win32_Process -ErrorAction SilentlyContinue | Where-Object { $_.CommandLine -match 'auto-heal\.ps1' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
+    & schtasks /delete /tn "ClaudeDesktopAutoHeal" /f 2>$null | Out-Null
+    $StartupLnk = Join-Path ([Environment]::GetFolderPath('Startup')) "ClaudeAutoHeal.lnk"
+    if (Test-Path $StartupLnk) { Remove-Item $StartupLnk -Force -ErrorAction SilentlyContinue }
+} catch {}
+
 Write-Host ""
 Write-Host "✅ Русификатор успешно удален. Claude Desktop возвращен к заводскому состоянию." -ForegroundColor Green

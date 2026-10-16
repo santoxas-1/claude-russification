@@ -1,0 +1,412 @@
+{
+  "version": 1,
+  "cards": [
+    {
+      "id": "scheduled-task-approval-lifetime",
+      "context": {
+        "markers": [
+          "Allow for all scheduled runs",
+          "mcpPersistentAlwaysAllowEnabled"
+        ],
+        "signatures": [
+          "toolPolicy",
+          "managedMcpServers"
+        ]
+      },
+      "fragments": {
+        "On a scheduled task, the approval prompt for an MCP tool can offer a lasting approval, so later runs use that tool without asking: ": "Для запланированной задачи запрос подтверждения инструмента MCP может предоставить постоянное разрешение, чтобы при последующих запусках инструмент использовался без запроса: ",
+        "in Cowork, ": " в Cowork, ",
+        "in the Code tab. This setting limits how long that approval lasts. With a limit, the button reads ": " на вкладке Code. Этот параметр ограничивает срок действия такого разрешения. При установке лимита кнопка будет иметь вид ",
+        ". Once an approval is older than that, the next run asks again, and approving again renews it. ": ". Если срок разрешения истёк, следующий запуск снова запросит подтверждение, а повторное одобрение обновит его. ",
+        "removes the lasting option, and approvals already stored stop being reused. Leave it blank to change nothing. Choose a number comfortably longer than the gap between runs.": "отключает постоянное разрешение, и сохранённые подтверждения перестают использоваться. Оставьте поле пустым, чтобы ничего не менять. Выберите значение с запасом, превышающее интервал между запусками.",
+        "The limit covers MCP tools only, and a ": "Ограничение распространяется только на инструменты MCP, при этом запись ",
+        "entry on ": " в ",
+        "still takes precedence. If a configuration server delivers the setting, then after each launch scheduled tasks ask instead of reusing stored approvals (as at ": "по-прежнему имеет приоритет. Если параметр задан сервером конфигурации, то после каждого запуска запланированные задачи будут запрашивать подтверждение вместо использования сохранённых разрешений (как при значении ",
+        ") until the app has fetched the configuration again.": "), пока приложение снова не получит конфигурацию.",
+        "Cowork: if ": "Cowork: если параметр ",
+        "is off, this setting brings the lasting option back for scheduled tasks only, with the time limit.": "выключен, этот параметр возвращает возможность постоянного разрешения только для запланированных задач с ограничением по времени.",
+        "Code tab: ": "Вкладка Code: параметр ",
+        "has no effect. The limit covers only lasting approvals given after this setting took effect. An earlier one was usually saved as an allow rule in Claude Code's own settings: for a scheduled task, the project's ": "не влияет на работу. Ограничение распространяется только на постоянные разрешения, выданные после вступления этой настройки в силу. Ранее выданные разрешения обычно сохранялись в настройках самого Claude Code: для запланированных задач — в файле проекта ",
+        ", under ": ", в секции ",
+        ". Any allow rule in Claude Code's settings, including one written by hand or by ": ". Любое разрешающее правило в настройках Claude Code, включая добавленные вручную или через ",
+        "in an ordinary Code session in the same project, keeps allowing the tool without asking, even at ": "в обычной сессии Code того же проекта, продолжит разрешать использование инструмента без запроса, даже при значении ",
+        ", until that entry is removed.": ", пока эта запись не будет удалена."
+      }
+    },
+    {
+      "id": "stream-idle-timeout",
+      "context": {
+        "markers": [
+          "CLAUDE_STREAM_IDLE_TIMEOUT_MS"
+        ],
+        "signatures": [
+          "LiteLLM",
+          "automatic compaction"
+        ]
+      },
+      "fragments": {
+        "Raises how long Cowork, Chat and Code sessions wait for the next model event on an open streaming response (Claude Code's ": "Увеличивает время ожидания сессиями Cowork, Chat и Code следующего события модели в открытом потоковом ответе (параметр Claude Code ",
+        "). It only helps when the gateway writes SSE keep-alive ": "). Это помогает только тогда, когда шлюз записывает keep-alive события SSE ",
+        "events (or ": " (или строки комментариев ",
+        "comment lines) into the response while the upstream model is silent — for example a LiteLLM proxy with keep-alive pings enabled in front of Amazon Bedrock. With pings arriving, Claude Code accepts at least about five minutes of keep-alives and then waits this many seconds more for real model output before abandoning the request. Gateway provider only; the other providers keep Claude Code's defaults.": ") в ответ, пока вышестоящая модель ожидает данных — например, прокси LiteLLM со включёнными keep-alive пингами перед Amazon Bedrock. При поступлении пингов Claude Code ожидает не менее пяти минут, а затем ждёт ещё указанное количество секунд реального ответа модели, прежде чем прервать запрос. Применимо только для провайдера шлюза; остальные провайдеры сохраняют значения по умолчанию Claude Code.",
+        "A response on which nothing at all arrives — no pings — still fails after about 5 minutes regardless of this key, because at the device a silent connection cannot be told apart from a dead one. If long generations fail behind a gateway that does not send pings, configure the gateway to send them rather than raising this value. A common case is automatic compaction, in which a session sends its whole conversation in one streaming request and waits for a long summary; when that request fails, the error reads ": "Ответ, в котором вообще ничего не приходит (нет пингов), всё равно завершится ошибкой примерно через 5 минут независимо от этого ключа, поскольку на устройстве молчащее соединение невозможно отличить от оборванного. Если длительные генерации завершаются сбоем за шлюзом, не отправляющим пинги, настройте их отправку на шлюзе вместо увеличения этого значения. Типичный случай — автоматическое сжатие контекста, когда сессия отправляет всю беседу в одном потоковом запросе и ожидает подробную сводку; при сбое такого запроса отображается ошибка ",
+        "Prompt is too long · automatic compaction failed: ": "Промпт слишком длинный · автоматическое сжатие завершилось ошибкой: ",
+        "followed by the cause. While this key is set, the app's value takes precedence over ": ", за которой следует причина. Пока этот ключ установлен, значение приложения имеет приоритет над ",
+        "in Claude Code's own managed settings for sessions the app starts; when it is unset, that setting still applies. Values outside 300–1800 are rejected at parse time (the error is listed in the diagnostics report) and the default applies.": "в управляемых настройках самого Claude Code для сессий, запускаемых приложением; если он не задан, применяется эта настройка. Значения вне диапазона 300–1800 отклоняются при разборе (ошибка фиксируется в диагностическом отчёте) и применяется значение по умолчанию."
+      }
+    },
+    {
+      "id": "gateway-managed-claude-code",
+      "context": {
+        "markers": [
+          "CLAUDE_CODE_USE_GATEWAY"
+        ],
+        "signatures": [
+          "inferenceCredentialKind",
+          "skipWebFetchPreflight"
+        ]
+      },
+      "fragments": {
+        "Set this to ": "Установите в ",
+        "to run Claude Code in its gateway mode (": ", чтобы запускать Claude Code в режиме шлюза (",
+        ") in Cowork, Chat and Code sessions for users who signed in through the gateway's own sign-in (": ") в сессиях Cowork, Chat и Code для пользователей, вошедших через собственный вход шлюза (",
+        "with no organization identity provider configured). In gateway mode Claude Code turns off its usage analytics and authenticated calls to Anthropic (the WebFetch tool's hostname-only domain lookup is governed separately by ": "без настроенного поставщика удостоверений организации). В режиме шлюза Claude Code отключает аналитику использования и аутентифицированные вызовы к Anthropic (проверка только имени хоста инструментом WebFetch регулируется отдельно параметром ",
+        "), and may hide its WebSearch tool. ": "), а также может скрывать инструмент WebSearch. ",
+        "keeps base-URL routing, where those sessions treat the gateway as the Anthropic API at a custom base URL. A change takes effect for sessions started after the next app launch. Other sign-in methods and other providers ignore this key, and in a third-party deployment a ": "сохраняет маршрутизацию по базовому URL, где такие сессии работают со шлюзом как с Anthropic API по настраиваемому базовому URL. Изменение вступает в силу для сессий, запущенных после следующего перезапуска приложения. Другие методы входа и провайдеры игнорируют этот ключ, а при стороннем развёртывании параметр ",
+        "in a user's own environment is ignored for app sessions either way.": "в пользовательской среде в любом случае игнорируется для сессий приложения."
+      }
+    },
+    {
+      "id": "model-discovery",
+      "context": {
+        "markers": [
+          "Auto-populate the model picker",
+          "endpoint at launch"
+        ],
+        "signatures": [
+          "sonnet/opus",
+          "discovery"
+        ]
+      },
+      "fragments": {
+        "Auto-populate the model picker from the provider's model-list endpoint at launch. For gateway and Anthropic providers, a config that doesn't set this key skips discovery automatically when the model list below already makes it unnecessary; the toggle here only sets it explicitly on or off. Turn off if the endpoint isn't reachable from your network, or to use a fixed list. When off, the model list below is required and must use full model IDs (aliases like sonnet/opus are resolved via discovery).": "Автоматически заполнять список моделей из эндпоинта со списком моделей провайдера при запуске. Для шлюза и провайдеров Anthropic конфигурация, в которой этот ключ не задан, автоматически пропускает обнаружение, если приведённый ниже список моделей уже делает его излишним; переключатель здесь лишь явно включает или выключает его. Отключите, если эндпоинт недоступен из вашей сети, или чтобы использовать фиксированный список. При отключении список моделей ниже становится обязательным и должен содержать полные ID моделей (псевдонимы, такие как sonnet/opus, определяются через обнаружение)."
+      }
+    },
+    {
+      "id": "prefer-1m-context",
+      "context": {
+        "markers": [
+          "1M-token context window",
+          "inferenceModels"
+        ],
+        "signatures": [
+          "supports1m",
+          "prefer1m"
+        ]
+      },
+      "fragments": {
+        "Every model that offers a 1M-token context window shows one option in the model picker, and sessions on it request 1M from your provider. A model offers 1M when its ": "Каждая модель, предлагающая контекстное окно в 1M токенов, отображает один вариант в списке выбора, и сессии на ней запрашивают 1M у вашего поставщика. Модель поддерживает 1M, когда запись в её ",
+        "entry sets ": "содержит ",
+        "or, under discovery, when your gateway's model list marks it. Equivalent to setting ": "или, при обнаружении, когда список моделей вашего шлюза помечает её. Эквивалентно установке ",
+        "on each of those entries, but also applies under dynamic discovery. To leave one listed model out, remove its ": "в каждой из этих записей, но также применяется и при динамическом обнаружении. Чтобы исключить одну из моделей списка, удалите её параметр ",
+        ". Beside a model list in which no entry sets ": ". Если в списке моделей ни одна запись не содержит ",
+        ", this setting does nothing. Older Claude Desktop versions show both options and only start the default model on its 1M option.": ", этот параметр ничего не делает. Старые версии Claude Desktop показывают оба варианта и запускают с опцией 1M только модель по умолчанию."
+      }
+    },
+    {
+      "id": "reset-model-defaults-per-task",
+      "context": {
+        "markers": [
+          "inferenceModels",
+          "default model"
+        ],
+        "signatures": [
+          "effort choices",
+          "remembered per tab"
+        ]
+      },
+      "fragments": {
+        "When ": "Когда задано ",
+        ", each new conversation or task in Chat, Cowork and Code starts on the default model (the first ": ", каждый новый диалог или задача в Chat, Cowork и Code запускается на модели по умолчанию (первая запись в ",
+        "entry), and the model and effort choices a person makes are no longer saved as their defaults. When unset or ": "), а выбранные пользователем модель и уровень рассуждений больше не сохраняются как значения по умолчанию. Если не задано или ",
+        ", a person's last model and effort choice is remembered per tab, as before. Choices saved before the setting was turned on are kept and apply again if it is turned off.": ", последний выбор модели и уровня рассуждений запоминается для каждой вкладки, как и раньше. Выбранные значения, сохранённые до включения этой настройки, сохраняются и снова вступают в силу при её отключении."
+      }
+    },
+    {
+      "id": "managed-mcp-servers-card",
+      "context": {
+        "markers": [
+          "toolPolicy",
+          "managedMcpServers"
+        ],
+        "signatures": [
+          "OAuth",
+          "wildcard"
+        ]
+      },
+      "fragments": {
+        "For OAuth-authenticated entries, the app builds the redirect URI as ": "Для записей с аутентификацией OAuth приложение формирует redirect URI в виде ",
+        "; register that exact value with the OAuth provider. Tokens refresh automatically during a session.": "; зарегистрируйте именно это значение у провайдера OAuth. Токены обновляются автоматически во время сессии.",
+        "toolPolicy locks the per-tool approval state, keyed by tool name: ": "Параметр toolPolicy фиксирует состояние подтверждения для каждого инструмента по его имени: ",
+        "removes the tool from the session and labels it admin-blocked, ": "удаляет инструмент из сессии и помечает его как заблокированный администратором, ",
+        "requires approval on every call (Allow once / Deny only; no persistent always-allow; a scheduled Cowork task waits at that prompt), ": "требует подтверждения при каждом вызове (только «Разрешить один раз» или «Запретить»; постоянное разрешение недоступно; запланированная задача Cowork ожидает в этом запросе), ",
+        "pre-approves. Tools ": "предварительно одобряет инструмент. Инструменты ",
+        "follow the user's choice: the prompt offers a persistent Always allow, except for tools that can modify data, which show a session-scoped ": "следуют выбору пользователя: диалог предлагает постоянное «Всегда разрешать», кроме инструментов, которые могут изменять данные — для них показывается подтверждение на одну сессию ",
+        "alongside ": " наряду с ",
+        "with a malicious-instruction warning. In Code sessions, ": " с предупреждением о вредоносных инструкциях. В сессиях Code параметры ",
+        "are forwarded as Claude Code permission rules; ": "передаются как правила разрешений Claude Code; параметр ",
+        "is not.": "не передаётся.",
+        "Keys may contain ": "Ключи могут содержать подстановочные знаки ",
+        "wildcards (": " (",
+        "matches every tool whose name starts with ": "соответствует каждому инструменту, чьё имя начинается с ",
+        "; anchored, and ": "; привязан к началу, и ",
+        "is the only wildcard). When several wildcard keys match, the strictest applies (blocked > ask > allow). An exact-name key wins over matching wildcards, with two exceptions in the stricter direction: in Code sessions a wildcard ": "— единственный подстановочный знак). При совпадении нескольких шаблонов применяется самый строгий (blocked > ask > allow). Точное совпадение имени имеет приоритет над шаблонами, за двумя исключениями в сторону большей строгости: в сессиях Code шаблон ",
+        ", or a wildcard ": ", либо шаблон ",
+        "other than the bare ": ", отличный от простого ",
+        ", beats a less strict exact key (so ": ", имеет приоритет над менее строгим точным ключом (поэтому комбинация ",
+        "plus exact ": "вместе с точными записями ",
+        "entries still works as deny-by-default there); and in chat approval prompts and always-allow persistence a wildcard ": "по-прежнему работает по принципу «запрещено по умолчанию»); а в запросах подтверждения чата и постоянных разрешениях шаблон ",
+        "keeps every matching tool behind a per-call prompt even when a more permissive exact key matches, while direct tool invocations such as artifact or widget calls follow the exact key.": "требует подтверждения при каждом вызове подходящего инструмента, даже если есть более мягкий точный ключ, тогда как прямые вызовы инструментов (артефакты или виджеты) следуют точному ключу.",
+        "For the bundled Microsoft 365 connector, the send tools (": "Для встроенного коннектора Microsoft 365 инструменты отправки (",
+        ") cannot be loosened below ": ") не могут быть ослаблены ниже "
+      }
+    },
+    {
+      "id": "allow-persistent-tool-approvals-card",
+      "context": {
+        "markers": [
+          "toolPolicy",
+          "Always allow"
+        ],
+        "signatures": [
+          "Tool permissions picker",
+          "Connector settings"
+        ]
+      },
+      "fragments": {
+        "When enabled (the default), approval prompts for tools without a ": "Если включено (по умолчанию), диалоги подтверждения для инструментов без записи в ",
+        "entry offer a persistent grant — ": "предлагают постоянное разрешение — «Всегда разрешать», либо ",
+        ", or ": ", или ",
+        "for tools that can modify data — the Tool permissions picker in Connector settings lets users pre-approve tools, and those grants persist across sessions with no expiry.": "для инструментов, способных изменять данные: средство выбора разрешений инструментов в настройках коннектора позволяет пользователям заранее одобрять инструменты, и эти разрешения сохраняются между сессиями без ограничения по времени.",
+        "When disabled, the persistent options are hidden from approval prompts and from the Connector settings picker, and previously stored persistent grants stop being honored. Scheduled-task runs also stop offering, recording and replaying the ": "Если отключено, варианты постоянного разрешения скрываются из диалогов подтверждения и настроек коннектора, а ранее сохранённые постоянные разрешения перестают действовать. Запланированные задачи также перестают предлагать, сохранять и воспроизводить подтверждение ",
+        "approval, unless a scheduled-task approval lifetime of one day or more is set. Users can still approve each call. Outside scheduled-task runs they can also choose ": ", если только не задан срок действия разрешений запланированных задач от одного дня и более. Пользователи по-прежнему могут одобрять каждый вызов. Вне запланированных задач также доступен вариант ",
+        ", except for read-only tools on servers they added themselves.": ", за исключением инструментов только для чтения на серверах, добавленных пользователем самостоятельно.",
+        "A per-tool ": "Индивидуальная запись ",
+        "always takes precedence over this key: ": "всегда имеет приоритет над этим ключом: значения ",
+        ", а также ": ", а также ",
+        "behave exactly as documented there whether this key is enabled or not.": "действуют в точности так, как там описано, независимо от того, включён ли этот ключ.",
+        "This key governs the chat and Cowork surfaces. Code sessions use a separate permission path this key does not cover — govern Code tool approvals with per-tool ": "Этот ключ управляет интерфейсами чата и Cowork. Сессии Code используют отдельный механизм разрешений, не охватываемый этим ключом — управляйте подтверждениями инструментов Code с помощью записей ",
+        "entries, whose ": ", чьи значения ",
+        "values are forwarded there.": "передаются туда."
+      }
+    },
+    {
+      "id": "auto-import-3p-sessions",
+      "context": {
+        "markers": [
+          "Under device-delivered configuration",
+          "hosted configuration"
+        ],
+        "signatures": [
+          "allowedPluginMarketplaces",
+          "userPluginUploadsEnabled"
+        ]
+      },
+      "fragments": {
+        "Under device-delivered configuration (device management, a configuration file or a bootstrap URL) this runs only when set to ": "При конфигурации, доставленной на устройство (через управление устройствами, файл конфигурации или bootstrap URL), это работает, только если установлено значение ",
+        "; for organizations managed from the Claude admin console (the hosted configuration) it is on unless an admin turns it off there. When the app launches under this organization, it copies this computer's earlier third-party sessions into its session store, with Settings → Import's importer (originals are kept). It lists the earlier configuration's Cowork artifacts in this organization. Optional plugins the user had on come back if still offered: those from the organization plugins directory are switched on, and those from an optional ": "; для организаций, управляемых из консоли администратора Claude (размещённая конфигурация), эта функция включена, если только администратор не отключил её там. Когда приложение запускается под этой организацией, оно копирует предыдущие сторонние сессии с этого компьютера в своё хранилище сессий с помощью средства импорта «Настройки → Импорт» (оригиналы сохраняются). В этой организации отображаются артефакты Cowork из предыдущей конфигурации. Дополнительные плагины, включённые пользователем, восстанавливаются, если они по-прежнему доступны: плагины из каталога плагинов организации включаются, а плагины из необязательной записи ",
+        " entry on the gateway or bootstrap server's own source are reinstalled without asking. Plugins uploaded by the user (unless ": " на собственном источнике шлюза или bootstrap-сервера устанавливаются повторно без запроса. Плагины, загруженные пользователем (если только ",
+        " is off; they can run programs on this computer) and skills saved by them (unless ": " не выключено; они могут запускать программы на этом компьютере), и сохранённые им навыки (если только ",
+        " is off) are installed again without asking, on or off as they were; a skill that declares tools, hooks, metadata or unknown settings arrives off. Other marketplaces’ plugins stay behind. Earlier Cowork projects are added, their instructions held until the user accepts them. The user’s Cowork memory, global instructions and Instructions for Claude are copied and used at once, unreviewed (no memory if it was paused). Earlier scheduled tasks are added, each on or off as it was: one that was on runs at its next scheduled time. Runs at most once per device under device-delivered configuration and once more after it joins the hosted configuration. Under the hosted configuration it takes sessions from any earlier device configuration (including ones a console sign-in created) but never those stored under another organization’s hosted configuration; under device-delivered configuration, only those stored while no organization ID was configured, and only once one is. Turn on ": " не выключено) устанавливаются снова без запроса в том же состоянии (включены или выключены); навык, объявляющий инструменты, хуки, метаданные или неизвестные настройки, устанавливается выключенным. Плагины из других каталогов не переносятся. Добавляются предыдущие проекты Cowork, их инструкции удерживаются до подтверждения пользователем. Память Cowork пользователя, глобальные инструкции и инструкции для Claude копируются и применяются сразу без проверки (память не переносится, если была приостановлена). Предыдущие запланированные задачи добавляются с сохранением их состояния: активная задача запустится в назначенное время. Запускается не более одного раза на устройство при конфигурации, доставленной на устройство, и ещё один раз после присоединения к размещённой конфигурации. При размещённой конфигурации сессии берутся из любой предыдущей конфигурации устройства (включая созданные при входе через консоль), но никогда — из сессий под размещённой конфигурацией другой организации; при конфигурации, доставленной на устройство, берутся только сессии, сохранённые, пока не был настроен ID организации, и только один раз после его настройки. Включите также параметр ",
+        " too so users can import sessions it leaves out by hand.": ", чтобы пользователи могли вручную импортировать оставшиеся сессии."
+      }
+    },
+    {
+      "id": "organizations-import-list",
+      "context": {
+        "markers": [
+          "A list of Claude.ai organization IDs (UUIDs)",
+          "desktop_claude_ai_import"
+        ],
+        "signatures": [
+          "otlpDesktopLogLevel",
+          "automatic3pImport"
+        ]
+      },
+      "fragments": {
+        "A list of Claude.ai organization IDs (UUIDs). When set, users can import only by signing in to Claude.ai, and only from an organization on the list: a sign-in to any other organization, or to a personal account, is refused before anything is downloaded. Importing from a file and from earlier sessions on this computer is turned off. The list narrows ": "Список идентификаторов организаций Claude.ai (UUID). Если задан, пользователи могут импортировать данные только через вход в Claude.ai и только из организаций из списка: вход в любую другую организацию или в личный аккаунт отклоняется до начала загрузки. Импорт из файла и из предыдущих сессий на этом компьютере отключается. Этот список сужает действие параметра ",
+        " and turns nothing on by itself; ": " и сам по себе ничего не включает; на параметр ",
+        " is not affected. An entry that is not a UUID allows nothing and is reported. An empty list, or one that cannot be read, allows no organization, so no import is offered; a null or blank value is read as not set. A provisioned sign-in import names no organization, so it is not offered while the list is set. Each import is reported to your OpenTelemetry collector as the event ": " он не влияет. Запись, не являющаяся UUID, ничего не разрешает и регистрируется в отчёте. Пустой или нечитаемый список запрещает любые организации, поэтому импорт не предлагается; пустое значение (null) читается как «не задано». Импорт при входе через автоматическую инициализацию не привязан к организации, поэтому он не предлагается, пока этот список задан. Каждый импорт отправляется в ваш коллектор OpenTelemetry как событие ",
+        ", с идентификатором организации, из которой он получен. Это информационное событие (уровень info): установите ": ", с идентификатором организации, из которой он получен. Это информационное событие (уровень info): установите параметр ",
+        " to ": " в значение ",
+        " для его получения.": " для его получения.",
+        " with the organization ID it came from. This is an informational (info-level) event: set ": " с идентификатором организации, из которой он получен. Это информационное событие (уровень info): установите параметр ",
+        " to receive it.": " для его получения."
+      }
+    },
+    {
+      "id": "telemetry-basic-data",
+      "context": {
+        "markers": [
+          "crash dumps",
+          "Reports carry a random install ID"
+        ],
+        "signatures": [
+          "organization ID",
+          "session ID"
+        ]
+      },
+      "fragments": {
+        " (each an unfiltered copy of part of the app's memory). Reports carry a random install ID and an organization ID. The organization ID is the one you set, one the app takes from your Anthropic sign-in or derives from your connection settings, or a placeholder shared with other unconfigured deployments. Reports can also include a summary of your settings, the host names of addresses you configured, text you set for display (such as the display name, subtitle, and banner text and link), and a one-way digest of a session ID.": " (каждый представляет собой неотфильтрованную копию части оперативной памяти приложения). Отчёты содержат случайный идентификатор установки и идентификатор организации. Идентификатор организации — это тот, который вы задали, полученный приложением при входе в Anthropic или из настроек подключения, либо заполнитель, общий для других ненастроенных развёртываний. Отчёты также могут включать сводку ваших настроек, имена хостов настроенных вами адресов, текст для отображения (отображаемое имя, подзаголовок, текст и ссылку баннера) и односторонний дайджест идентификатора сессии.",
+        " (each an unfiltered copy of part of the app’s memory). Reports carry a random install ID and an organization ID. The organization ID is the one you set, one the app takes from your Anthropic sign-in or derives from your connection settings, or a placeholder shared with other unconfigured deployments. Reports can also include a summary of your settings, the host names of addresses you configured, text you set for display (such as the display name, subtitle, and banner text and link), and a one-way digest of a session ID.": " (каждый представляет собой неотфильтрованную копию части оперативной памяти приложения). Отчёты содержат случайный идентификатор установки и идентификатор организации. Идентификатор организации — это тот, который вы задали, полученный приложением при входе в Anthropic или из настроек подключения, либо заполнитель, общий для других ненастроенных развёртываний. Отчёты также могут включать сводку ваших настроек, имена хостов настроенных вами адресов, текст для отображения (отображаемое имя, подзаголовок, текст и ссылку баннера) и односторонний дайджест идентификатора сессии."
+      }
+    },
+    {
+      "id": "relaunch-enforcement-hours",
+      "context": {
+        "markers": [
+          "Set it via MDM (plist, registry, or file)",
+          "sidebar relaunch card"
+        ],
+        "signatures": [
+          "relaunch",
+          "24-hour default"
+        ]
+      },
+      "fragments": {
+        "Set it via MDM (plist, registry, or file) or serve it from your configuration endpoint (remote bootstrap configuration). When the running app observes a managed-configuration change it cannot apply without restarting, it shows the sidebar relaunch card and starts this window. The window starts at the running app’s next configuration re-check (the re-check interval beside it), so allow up to one re-check interval on top of this value between saving a change and the restart dialog. When the window ends the app blocks with a restart dialog and restarts on its own after 2 minutes with no activity (no running Claude task and no keyboard or pointer input); the user can also restart right away. Defaults to 24 hours. Set a larger value (up to 336 = 14 days) to give users longer; ": "Задайте этот параметр через MDM (plist, реестр или файл) либо передавайте его с вашей конечной точки конфигурации (удалённая bootstrap-конфигурация). Когда работающее приложение обнаруживает изменение управляемой конфигурации, которое нельзя применить без перезапуска, оно показывает карточку перезапуска на боковой панели и открывает это окно. Окно открывается при следующей повторной проверке конфигурации работающим приложением (интервал повторной проверки указан рядом), поэтому заложите до одного интервала проверки сверх этого значения между сохранением изменения и диалогом перезапуска. Когда окно заканчивается, приложение блокируется с диалоговым окном перезапуска и перезапускается самостоятельно через 2 минуты отсутствия активности (нет выполняемой задачи Claude и нет ввода с клавиатуры или мыши); пользователь также может перезапустить его сразу. По умолчанию 24 часа. Установите большее значение (до 336 = 14 дней), чтобы дать пользователям больше времени; ",
+        "Set it via MDM (plist, registry, or file) or serve it from your configuration endpoint (remote bootstrap configuration). When the running app observes a managed-configuration change it cannot apply without restarting, it shows the sidebar relaunch card and starts this window. The window starts at the running app's next configuration re-check (the re-check interval beside it), so allow up to one re-check interval on top of this value between saving a change and the restart dialog. When the window ends the app blocks with a restart dialog and restarts on its own after 2 minutes with no activity (no running Claude task and no keyboard or pointer input); the user can also restart right away. Defaults to 24 hours. Set a larger value (up to 336 = 14 days) to give users longer; ": "Задайте этот параметр через MDM (plist, реестр или файл) либо передавайте его с вашей конечной точки конфигурации (удалённая bootstrap-конфигурация). Когда работающее приложение обнаруживает изменение управляемой конфигурации, которое нельзя применить без перезапуска, оно показывает карточку перезапуска на боковой панели и открывает это окно. Окно открывается при следующей повторной проверке конфигурации работающим приложением (интервал повторной проверки указан рядом), поэтому заложите до одного интервала проверки сверх этого значения между сохранением изменения и диалогом перезапуска. Когда окно заканчивается, приложение блокируется с диалоговым окном перезапуска и перезапускается самостоятельно через 2 минуты отсутствия активности (нет выполняемой задачи Claude и нет ввода с клавиатуры или мыши); пользователь также может перезапустить его сразу. По умолчанию 24 часа. Установите большее значение (до 336 = 14 дней), чтобы дать пользователям больше времени; ",
+        "A served value is read from the newest served configuration, so tightening or loosening the window takes effect without a restart once two re-checks in a row have served it, and a change to this key alone never asks for one. Like the update keys beside it, a value from a device-management profile that sets only app-behavior keys applies without making the rest of the configuration device-managed, and takes precedence over a served one. Because the key is grouped with the other app-behavior keys, a profile that sets any of them claims the whole group: set this key in the same profile as the update keys you deploy, or a served value is ignored on those devices and the 24-hour default applies.": "Переданное значение считывается из самой новой полученной конфигурации, поэтому ужесточение или смягчение окна вступает в силу без перезапуска, как только две проверки подряд передали его, а изменение только этого ключа никогда не требует перезапуска. Как и расположенные рядом ключи обновления, значение из профиля управления устройствами, задающее только ключи поведения приложения, применяется без перевода остальной конфигурации под управление устройством и имеет приоритет над полученным значением. Поскольку этот ключ сгруппирован с другими ключами поведения приложения, профиль, задающий любой из них, заявляет права на всю группу: задайте этот ключ в том же профиле, что и развёртываемые ключи обновления, иначе полученное значение будет игнорироваться на этих устройствах и применится значение по умолчанию 24 часа."
+      }
+    },
+    {
+      "id": "recheck-interval-card",
+      "context": {
+        "markers": [
+          "Applied without a restart: a new served value",
+          "disableAutoUpdates"
+        ],
+        "signatures": [
+          "autoUpdaterEnforcementHours",
+          "bootstrapUrl"
+        ]
+      },
+      "fragments": {
+        "Applied without a restart: a new served value re-arms the timer once two checks in a row have served it, and a change to this key alone never asks for a relaunch. Set it via MDM or serve it from your configuration endpoint; like the update keys beside it, a value from a device-management profile that sets only app-behavior keys applies without making the rest of the configuration device-managed, and takes precedence over a served one. Because the key is grouped with the other app-behavior keys, a profile that sets any of them claims the whole group, and every key in it is then read from that profile alone: deploy this key in the same profile as the update keys (": "Применяется без перезапуска: новое полученное значение сбрасывает таймер, как только две проверки подряд вернули его, а изменение только этого ключа никогда не требует перезапуска. Задайте его через MDM или передавайте с конечной точки конфигурации; как и расположенные рядом ключи обновления, значение из профиля управления устройствами, задающее только ключи поведения приложения, применяется без перевода остальной конфигурации под управление устройством и имеет приоритет над полученным значением. Поскольку этот ключ сгруппирован с другими ключами поведения приложения, профиль, задающий любой из них, заявляет права на всю группу, и каждый ключ в ней затем читается исключительно из этого профиля: развёртывайте этот ключ в том же профиле, что и ключи обновления (",
+        ", ...). Профиль, задающий ключи обновления без него, игнорирует переданный интервал и применяется значение по умолчанию; профиль, задающий только этот ключ, игнорирует переданные настройки обновления, поэтому переданная ": ", ...). Профиль, задающий ключи обновления без него, игнорирует переданный интервал и применяется значение по умолчанию; профиль, задающий только этот ключ, игнорирует переданные настройки обновления, поэтому переданная настройка "
+      }
+    },
+    {
+      "id": "export-session-details",
+      "context": {
+        "markers": [
+          "Allows users to write this computer's chats",
+          "portable zip"
+        ],
+        "signatures": [
+          "Transcripts contain conversation content",
+          "sensitive data"
+        ]
+      },
+      "fragments": {
+        "Allows users to write this computer's chats, Cowork tasks, and Code sessions to a portable zip that another install can import from Settings > Import. Transcripts contain conversation content including tool outputs; only session-record metadata is projected to a fixed field allowlist. Treat exported zips as sensitive data.": "Позволяет пользователям сохранять чаты, задачи Cowork и сессии Code с этого компьютера в переносимый zip-архив, который можно импортировать в другой установке через «Настройки > Импорт». Стенограммы содержат текст бесед, включая вывод инструментов; метаданные записей сессий фильтруются по фиксированному списку разрешённых полей. Относитесь к экспортированным zip-архивам как к конфиденциальным данным."
+      }
+    },
+    {
+      "id": "blocked-plugin-servers-format-card",
+      "context": {
+        "markers": [
+          "allowedPluginMcpServers",
+          "serverName"
+        ],
+        "signatures": [
+          "serverCommand",
+          "blocks every plugin"
+        ]
+      },
+      "fragments": {
+        " forms included: a value that is not a list, or that holds any entry the desktop cannot read, is reported and blocks every plugin's remote server (and those configuration-file remote servers), because skipping an entry of a block list would let its server connect. The servers named above as not affected still connect.": ", включая формы serverName и serverCommand: значение, не являющееся списком или содержащее запись, которую приложение не может прочитать, регистрируется в отчёте и блокирует удалённые серверы всех плагинов (а также удалённые серверы из конфигурационных файлов), поскольку пропуск записи в списке блокировки позволил бы её серверу подключиться. Указанные выше серверы, на которые это не распространяется, продолжают подключаться.",
+        " forms included: a value that is not a list, or that holds any entry the desktop cannot read, is reported and blocks every plugin’s remote server (and those configuration-file remote servers), because skipping an entry of a block list would let its server connect. The servers named above as not affected still connect.": ", включая формы serverName и serverCommand: значение, не являющееся списком или содержащее запись, которую приложение не может прочитать, регистрируется в отчёте и блокирует удалённые серверы всех плагинов (а также удалённые серверы из конфигурационных файлов), поскольку пропуск записи в списке блокировки позволил бы её серверу подключиться. Указанные выше серверы, на которые это не распространяется, продолжают подключаться."
+      }
+    },
+    {
+      "id": "allowed-workspace-folders-card",
+      "context": {
+        "markers": [
+          "allowedWorkspaceFolders",
+          "coworkEgressAllowedHosts"
+        ],
+        "signatures": [
+          "Access mode in Setup",
+          "sandbox.filesystem.allowRead"
+        ]
+      },
+      "fragments": {
+        " and a read there is refused with no prompt; elsewhere (Windows, Linux without bubblewrap, or neither folders nor an egress allowlist in effect) such shell reads prompt for approval. The app keeps the user's git configuration files (which may themselves embed credentials such as URL tokens; a symlinked one stays hidden), its own Claude Code installation, and the session's plugin and attachment folders readable (not on a Windows SSH host, where plugin files and attachments stay out of the file tools' reach under the block). An allowed folder that is or contains the home directory leaves it readable.": " и попытка чтения там отклоняется без запроса; в остальных случаях (Windows, Linux без bubblewrap либо когда не заданы папки и не действует список разрешённых исходящих узлов) такое чтение через оболочку запрашивает подтверждение. Приложение сохраняет доступными для чтения файлы конфигурации git пользователя (которые сами могут содержать учётные данные, например токены URL; файлы по символическим ссылкам остаются скрытыми), собственную установку Claude Code, а также папки плагинов и вложений сессии (кроме хостов Windows по SSH, где файлы плагинов и вложения остаются недоступными для файловых инструментов при блокировке). Разрешённая папка, которая является домашней директорией или содержит её, оставляет её доступной для чтения.",
+        " or ": " или ",
+        " to \"merge\", a": " в значение \"merge\", а установка в ",
+        " makes it read-only; that field’s own description says how far read-only reaches. A Code session can reach every listed folder, not only the one it was opened in. Setting this key also turns on Claude Code’s sandbox where it runs (macOS, or Linux and SSH hosts with bubblewrap): there a shell command normally writes in the listed folders without an approval prompt, and its writes to most other places, such as a package cache in the home directory, are refused. A home directory holds shell start-up files and SSH keys, so list work folders, not a whole home directory.": " делает её доступной только для чтения; собственное описание этого поля указывает границы действия режима только для чтения. Сессия Code может обращаться к каждой указанной папке, а не только к той, в которой она была открыта. Установка этого ключа также включает песочницу Claude Code там, где она поддерживается (macOS или Linux и хосты SSH с bubblewrap): в этом случае команда оболочки обычно выполняет запись в указанные папки без запроса подтверждения, а её запись в большинство других мест (например, кэш пакетов в домашнем каталоге) отклоняется. Домашний каталог содержит стартовые файлы оболочки и ключи SSH, поэтому указывайте рабочие папки, а не весь домашний каталог целиком.",
+        " makes it read-only; that field's own description says how far read-only reaches. A Code session can reach every listed folder, not only the one it was opened in. Setting this key also turns on Claude Code's sandbox where it runs (macOS, or Linux and SSH hosts with bubblewrap): there a shell command normally writes in the listed folders without an approval prompt, and its writes to most other places, such as a package cache in the home directory, are refused. A home directory holds shell start-up files and SSH keys, so list work folders, not a whole home directory.": " делает её доступной только для чтения; собственное описание этого поля указывает границы действия режима только для чтения. Сессия Code может обращаться к каждой указанной папке, а не только к той, в которой она была открыта. Установка этого ключа также включает песочницу Claude Code там, где она поддерживается (macOS или Linux и хосты SSH с bubblewrap): в этом случае команда оболочки обычно выполняет запись в указанные папки без запроса подтверждения, а её запись в большинство других мест (например, кэш пакетов в домашнем каталоге) отклоняется. Домашний каталог содержит стартовые файлы оболочки и ключи SSH, поэтому указывайте рабочие папки, а не весь домашний каталог целиком."
+      }
+    },
+    {
+      "id": "access-mode-long-card",
+      "context": {
+        "markers": [
+          "Read-only folders can be viewed and searched but not modified in Cowork",
+          "In SSH sessions"
+        ],
+        "signatures": [
+          "sandbox.excludedCommands",
+          "CLAUDE_CONFIG_DIR"
+        ]
+      },
+      "fragments": {
+        "Read-only folders can be viewed and searched but not modified in Cowork (by Claude or via the UI). Bash runs in Cowork’s isolated workspace where the folder is mounted read-only at the OS level; file-tool writes (Edit, Write) are blocked in-process by Claude Desktop.": "Папки «только для чтения» можно просматривать и искать в них, но нельзя изменять в Cowork (ни через Claude, ни через интерфейс). Bash выполняется в изолированном рабочем пространстве Cowork, где папка монтируется только для чтения на уровне ОС; запись файловыми инструментами (Edit, Write) блокируется внутри процесса Claude Desktop.",
+        "Read-only folders can be viewed and searched but not modified in Cowork (by Claude or via the UI). Bash runs in Cowork's isolated workspace where the folder is mounted read-only at the OS level; file-tool writes (Edit, Write) are blocked in-process by Claude Desktop.": "Папки «только для чтения» можно просматривать и искать в них, но нельзя изменять в Cowork (ни через Claude, ни через интерфейс). Bash выполняется в изолированном рабочем пространстве Cowork, где папка монтируется только для чтения на уровне ОС; запись файловыми инструментами (Edit, Write) блокируется внутри процесса Claude Desktop.",
+        "In local Code sessions, read-only applies to Claude’s file tools only; Bash does not yet enforce it.": "В локальных сессиях Code режим только для чтения применяется исключительно к файловым инструментам Claude; Bash пока его не применяет.",
+        "In local Code sessions, read-only applies to Claude's file tools only; Bash does not yet enforce it.": "В локальных сессиях Code режим только для чтения применяется исключительно к файловым инструментам Claude; Bash пока его не применяет.",
+        "In SSH sessions (earlier versions ignore the mode on the host), read-only is enforced by Claude Code’s own permission rules: its file tools cannot modify the folder. A writable folder inside a read-only one is read-only too. Shell commands are stopped only where Claude Code’s sandbox runs (Linux needs bubblewrap and socat), and only as far as that sandbox goes: keep read-only folders outside writable ones, and use the operating system’s permissions where a folder must not change. The sandbox does not cover a path with * ? [ ] ( ) { } | + or a double quote. List each folder by its real path: shell commands may not be stopped in a folder listed through a link. Not enforced on Windows hosts, nor on a host with Claude Code managed settings of its own unless they set parentSettingsBehavior to merge. Not covered: MCP servers, hooks, the terminal, commands in sandbox.excludedCommands, and git worktrees, which Claude Desktop and Claude Code still create inside the folder.": "В сессиях SSH (более ранние версии игнорируют режим на хосте) режим только для чтения обеспечивается собственными правилами разрешений Claude Code: его файловые инструменты не могут изменять папку. Доступная для записи папка внутри папки только для чтения также становится доступной только для чтения. Команды оболочки блокируются только там, где работает песочница Claude Code (для Linux требуются bubblewrap и socat), и только в пределах этой песочницы: храните папки только для чтения отдельно от папок с разрешением на запись и используйте права доступа операционной системы там, где папка не должна изменяться. Песочница не охватывает пути со знаками * ? [ ] ( ) { } | + или двойными кавычками. Указывайте каждую папку по её реальному пути: команды оболочки могут не блокироваться в папке, заданной через символическую ссылку. Не действует на хостах Windows, а также на хостах с собственными управляемыми настройками Claude Code, если в них не задано parentSettingsBehavior to merge. Не охватываются: серверы MCP, хуки, терминал, команды в sandbox.excludedCommands и рабочие деревья git, которые Claude Desktop и Claude Code по-прежнему создают внутри папки.",
+        "In SSH sessions (earlier versions ignore the mode on the host), read-only is enforced by Claude Code's own permission rules: its file tools cannot modify the folder. A writable folder inside a read-only one is read-only too. Shell commands are stopped only where Claude Code's sandbox runs (Linux needs bubblewrap and socat), and only as far as that sandbox goes: keep read-only folders outside writable ones, and use the operating system's permissions where a folder must not change. The sandbox does not cover a path with * ? [ ] ( ) { } | + or a double quote. List each folder by its real path: shell commands may not be stopped in a folder listed through a link. Not enforced on Windows hosts, nor on a host with Claude Code managed settings of its own unless they set parentSettingsBehavior to merge. Not covered: MCP servers, hooks, the terminal, commands in sandbox.excludedCommands, and git worktrees, which Claude Desktop and Claude Code still create inside the folder.": "В сессиях SSH (более ранние версии игнорируют режим на хосте) режим только для чтения обеспечивается собственными правилами разрешений Claude Code: его файловые инструменты не могут изменять папку. Доступная для записи папка внутри папки только для чтения также становится доступной только для чтения. Команды оболочки блокируются только там, где работает песочница Claude Code (для Linux требуются bubblewrap и socat), и только в пределах этой песочницы: храните папки только для чтения отдельно от папок с разрешением на запись и используйте права доступа операционной системы там, где папка не должна изменяться. Песочница не охватывает пути со знаками * ? [ ] ( ) { } | + или двойными кавычками. Указывайте каждую папку по её реальному пути: команды оболочки могут не блокироваться в папке, заданной через символическую ссылку. Не действует на хостах Windows, а также на хостах с собственными управляемыми настройками Claude Code, если в них не задано parentSettingsBehavior to merge. Не охватываются: серверы MCP, хуки, терминал, команды в sandbox.excludedCommands и рабочие деревья git, которые Claude Desktop и Claude Code по-прежнему создают внутри папки.",
+        "A read-only folder that contains Claude’s own data directory (for example the home folder; over SSH, ~/.claude on the host) is enforced in Cowork only. Configure narrower folders for Code coverage. Over SSH, keep a Claude Code config folder moved by CLAUDE_CONFIG_DIR outside read-only folders.": "Папка «только для чтения», содержащая собственный каталог данных Claude (например, домашнюю папку; по SSH — ~/.claude на хосте), ограничивается только в Cowork. Для сессий Code настраивайте более узкие каталоги. По SSH сохраняйте папку конфигурации Claude Code, перенесённую с помощью CLAUDE_CONFIG_DIR, вне папок только для чтения.",
+        "A read-only folder that contains Claude's own data directory (for example the home folder; over SSH, ~/.claude on the host) is enforced in Cowork only. Configure narrower folders for Code coverage. Over SSH, keep a Claude Code config folder moved by CLAUDE_CONFIG_DIR outside read-only folders.": "Папка «только для чтения», содержащая собственный каталог данных Claude (например, домашнюю папку; по SSH — ~/.claude на хосте), ограничивается только в Cowork. Для сессий Code настраивайте более узкие каталоги. По SSH сохраняйте папку конфигурации Claude Code, перенесённую с помощью CLAUDE_CONFIG_DIR, вне папок только для чтения."
+      }
+    },
+    {
+      "id": "builtin-tool-policy-details-card",
+      "context": {
+        "markers": [
+          "disabledBuiltinTools",
+          "parentSettingsBehavior"
+        ],
+        "signatures": [
+          "prompts in Cowork, Chat and Code sessions",
+          "Code side chats cannot prompt"
+        ]
+      },
+      "fragments": {
+        " prompts in Cowork, Chat and Code sessions. Calls that Cowork and Chat always refuse are still refused without a prompt: paths outside the session's connected folders (in Chat, outside its scratch directory and its project's folders) and protected or sensitive files inside them. A scheduled task in Cowork waits at the prompt, which appears in the task's session and, when that session is not in view, as a desktop notification. Code side chats cannot prompt, so they block matching calls. An unusable entry is dropped and recorded as a configuration error; a value other than ": " запрашивает подтверждение в сессиях Cowork, Chat и Code. Вызовы, которые Cowork и Chat всегда отклоняют, по-прежнему отклоняются без запроса: пути вне подключённых папок сессии (в Chat — вне временного каталога и папок проекта) и защищённые или конфиденциальные файлы внутри них. Запланированная задача в Cowork ожидает подтверждения, которое появляется в сессии задачи, а если эта сессия скрыта — в виде уведомления на рабочем столе. Боковые чаты Code не могут запрашивать подтверждение, поэтому они блокируют подходящие вызовы. Непригодная для использования запись отбрасывается и фиксируется как ошибка конфигурации; значение, отличное от ",
+        " is treated as ": " обрабатывается как ",
+        " and logged. To block a tool entirely, use ": " и записывается в журнал. Чтобы полностью заблокировать инструмент, используйте параметр ",
+        " instead.": " вместо этого."
+      }
+    },
+    {
+      "id": "allowed-workspace-folders-mode-card",
+      "context": {
+        "markers": [
+          "Access mode in Setup",
+          "read-only reaches"
+        ],
+        "signatures": [
+          "package cache",
+          "shell start-up files"
+        ]
+      },
+      "fragments": {
+        " (Access mode in Setup) makes it read-only; that field’s own description says how far read-only reaches. A Code session can reach every listed folder, not only the one it was opened in. Setting this key also turns on Claude Code’s sandbox where it runs (macOS, or Linux and SSH hosts with bubblewrap): there a shell command normally writes in the listed folders without an approval prompt, and its writes to most other places, such as a package cache in the home directory, are refused. A home directory holds shell start-up files and SSH keys, so list work folders, not a whole home directory.": " (параметр «Режим доступа» в настройках) делает её доступной только для чтения; собственное описание этого поля указывает границы действия режима только для чтения. Сессия Code может обращаться к каждой указанной папке, а не только к той, в которой она была открыта. Установка этого ключа также включает песочницу Claude Code там, где она поддерживается (macOS или Linux и хосты SSH с bubblewrap): в этом случае команда оболочки обычно выполняет запись в указанные папки без запроса подтверждения, а её запись в большинство других мест (например, кэш пакетов в домашнем каталоге) отклоняется. Домашний каталог содержит стартовые файлы оболочки и ключи SSH, поэтому указывайте рабочие папки, а не весь домашний каталог целиком.",
+        " (Access mode in Setup) makes it read-only; that field's own description says how far read-only reaches. A Code session can reach every listed folder, not only the one it was opened in. Setting this key also turns on Claude Code's sandbox where it runs (macOS, or Linux and SSH hosts with bubblewrap): there a shell command normally writes in the listed folders without an approval prompt, and its writes to most other places, such as a package cache in the home directory, are refused. A home directory holds shell start-up files and SSH keys, so list work folders, not a whole home directory.": " (параметр «Режим доступа» в настройках) делает её доступной только для чтения; собственное описание этого поля указывает границы действия режима только для чтения. Сессия Code может обращаться к каждой указанной папке, а не только к той, в которой она была открыта. Установка этого ключа также включает песочницу Claude Code там, где она поддерживается (macOS или Linux и хосты SSH с bubblewrap): в этом случае команда оболочки обычно выполняет запись в указанные папки без запроса подтверждения, а её запись в большинство других мест (например, кэш пакетов в домашнем каталоге) отклоняется. Домашний каталог содержит стартовые файлы оболочки и ключи SSH, поэтому указывайте рабочие папки, а не весь домашний каталог целиком."
+      }
+    }
+  ]
+}

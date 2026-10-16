@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-10-16T03:54:22.967Z",
+  "sources": {
+    "dictionary_ru.py": 462,
+    "settings_translations.py": 120,
+    "all_tabs_ru.py": 107,
+    "tagged_strings.py": 7,
+    "screenshot_targets_ru.py": 137,
+    "new_screens_ru.py": 31,
+    "complete_ui_ru.json": 314
+  },
+  "lossChecks": {
+    "FORMATJS_MAP": {
+      "checked": 6277,
+      "losses": 0
+    },
+    "DICT": {
+      "checked": 4687,
+      "losses": 0
+    },
+    "native-en-US.json": {
+      "checked": 807,
+      "losses": 0
+    }
+  },
+  "lossDetails": {},
+  "placeholderChecks": {
+    "en-US.json": {
+      "translated": 5998,
+      "problems": 0
+    },
+    "native-en-US.json": {
+      "translated": 800,
+      "problems": 0
+    }
+  },
+  "placeholderProblems": {},
+  "outputs": {
+    "en-US.json": {
+      "ids": 34954,
+      "translated": 6000
+    },
+    "native-en-US.json": {
+      "ids": 807,
+      "translated": 801
+    },
+    "dynamic/en-US.json": {
+      "skipped": "нет src/dynamic-en-US.original.json — существующий dist/dynamic/en-US.json не перезаписывается"
+    },
+    "i18n-ru.js": {
+      "dict": 4954,
+      "formatjs": 6714,
+      "bytes": 1635953
+    }
+  },
+  "baselineDict": 4687,
+  "baselineFormatjs": 6277,
+  "rejectedOverrides": [],
+  "masterEntries": 4954,
+  "intentionalReverts": [
+    {
+      "key": "managed-settings",
+      "before": "управляемые настройки"
+    }
+  ],
+  "contextCards": 19,
+  "contextFragments": 124
+}
