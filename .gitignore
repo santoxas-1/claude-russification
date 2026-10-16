@@ -75,6 +75,11 @@ qa_verification_report.json
 verify_qa.js
 переведи/
 .claude/
+CLAUDE.md
 *.patch
 plugins/
+reports/
+tests/
+tests_*.js
+REPORT_FOR_AUTHOR.md
 
